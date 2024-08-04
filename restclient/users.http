@@ -1,0 +1,125 @@
+@HOST = https://alifpaywalletapi.azurewebsites.net
+@HOSTL = http://localhost:8080
+@AUTH = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTFlYjRmMC1kYzdlLTQzNTUtODQxMS0wNDZhNGEzNWI0YjAiLCJlbWFpbCI6ImthemFkNzlAZ21haWwuY29tIiwibmFtZSI6IkthbGFtIEF6YWQiLCJ1c2VybmFtZSI6ImthbGFtIiwiY291bnRyeSI6IjE4IiwibW9iaWxlbm8iOiI2MDE3NjcwMTk0NiIsInVpZCI6IjE0MTczMSIsImlhdCI6MTcxODA3MzI5OSwiZXhwIjoxNzE4MDc1MDk5fQ.0n3ztJdjqQyOgE1m7NJvC2frMf-6fHoxuUDcJgjRdcA
+@TESTID = 3eaa41ed-dff5-4ad7-85e6-df0151062b43
+@AUTH_S=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlZTQyOWQ4Mi05YWU3LTQ1YzAtODk2Ni04ZmIwMDNhM2VhNzAiLCJlbWFpbCI6InNoYXJtaW4xMTI3QGdtYWlsLmNvbSIsInVpZCI6MCwibmFtZSI6InNoYXJtaW4iLCJ1c2VybmFtZSI6InNoYXJtaW4iLCJjb3VudHJ5IjpudWxsLCJtb2JpbGVubyI6bnVsbCwicmVmcmVzaEtleSI6ImVlVjNQWmdkNVBwOWw0QkEyTjR4Y2c9PSIsImlhdCI6MTcxNjQ0NzM4Mn0.istVUMbqfoqEhhvu8WCCjloTbr4HfLki3eJ7RjJ0ZhE
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+@AUTH_1 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTFlYjRmMC1kYzdlLTQzNTUtODQxMS0wNDZhNGEzNWI0YjAiLCJlbWFpbCI6ImthemFkNzlAZ21haWwuY29tIiwibmFtZSI6IkthbGFtIEF6YWQiLCJ1c2VybmFtZSI6ImthbGFtIiwiY291bnRyeSI6IjE4IiwibW9iaWxlbm8iOiI2MDE3NjcwMTk0NiIsInVpZCI6IjE0MTczMSIsImlhdCI6MTcxODE3MzUzMCwiZXhwIjoxNzE4MTc1MzMwfQ.AHR0sFLBLl6hKe1MhK9RiS4pgPq4mcTHTphtnJUYNZQ
+@AUTH_R=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0OTNmZDQ5Yy1hOWQwLTRhNzEtYmVhYS01MDA0OWE0OTVlODkiLCJlbWFpbCI6ImthbGFtQG15cGFhYS5jb20iLCJ1aWQiOiIxMTcxNjYiLCJuYW1lIjoiRXhDb2RlIERpZ2l0YWwiLCJ1c2VybmFtZSI6ImV4Y29kZTIiLCJjb3VudHJ5IjpudWxsLCJtb2JpbGVubyI6IjYwMTc2NzAxOTQ5IiwicmVmcmVzaEtleSI6IndyZXhGV1l4aitpRmJCQWVwamR5Z3c9PSIsImlhdCI6MTcxNjYwMjQ0N30.Mz03cR-hnILObWqWIy2w4vdhQOU471yAZAd-l1YwPQI
+###
+
+POST {{HOSTL}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"username":"afnan",
+"password":"123456",
+"_x":"0"
+}
+###
+POST {{HOST}}/users HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"usertype":"1",
+"lastname":"enim",
+"firstname":"deserunt",
+"password":"ucode1234",
+"email":"aute@ucode.ai5",
+"mobile":"nonclf6"
+}
+
+###
+
+
+GET {{HOSTL}}/userInfo?exclude=1 HTTP/1.1
+Authorization: Bearer {{AUTH_1}}
+
+###
+
+GET {{HOST}}/users/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+#MAIN REGISTRATION for NODEJS VERSION
+POST {{HOST}}/users/reg HTTP/1.1
+content-type: application/json
+    
+{
+"email":"admin@alifpay.com",
+"password":"rightPay",
+"firstname":"Admin",
+"lastname":"AlifPay",
+"usertype":"0",
+"mobile":"60176408251"
+}
+###
+#MAIN REGISTRATION for Java Spring boot
+POST {{HOST}}/reg HTTP/1.1
+content-type: application/json
+ 
+{
+"email":"test@ucode.ai",
+"password":"123456",
+"firstname":"uCode",
+"lastname":"Test",
+"usertype":"0",
+"mobile":"60176408250"
+}
+###
+
+GET {{HOST}}/users? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/users?usertype=1&lastname=enim&firstname=deserunt&email=aute@ucode&mobile=nonclf6 HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOSTL}}/users/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PUT {{HOST}}/users/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"usertype":"1",
+"lastname":"enim",
+"firstname":"deserunt",
+"password":"ucode1234",
+"email":"aute@ucode.ai5",
+"mobile":"nonclf6"
+}
+###
+PATCH {{HOST}}/users/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"usertype":"1",
+"lastname":"enim",
+"firstname":"deserunt",
+"password":"ucode1234",
+"email":"aute@ucode.ai5",
+"mobile":"nonclf6"
+}
+###
+DELETE {{HOST}}/users/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 
+
+###
+###
+GET {{HOSTL}}/mpay/getTransferReference http/1.1
+Authorization: Bearer {{AUTH}} 
+
+###
+GET {{HOST}}/userdelete HTTP/1.1
+
+###
+POST {{HOSTL}}/refreshMytoken HTTP/1.1
+content-type: application/json
+
+{"refresh_token":"ae8y7Jeh4b9G8c1i-O1i9JfIbU-z4I710N6i-I9s8I0neR-58ceCdI060Ibk1paX2V0C8Jd9.eyJ1c2VySWQiOiJhODdlNDk4MS0xOWZiLTQ3MDYtOTgwZS04ZWQwMGIxYTIwOGQiLCJlbWFpbCI6ImV4Y29kZS5uZXRAZ21haWwuY29tIiwidWlkIjoiMTE3MjcwIiwibmFtZSI6IkFmbmFuIEFobWVkIiwidXNlcm5hbWUiOiJhZm5hbiIsImNvdW50cnkiOiIxMzAiLCJtb2JpbGVubyI6IjYwMTc2NzAxOTQ1IiwicmVmcmVzaEtleSI6ImMrejRWOGtXYnJjZitpS1N0UFIxTmc9PSIsImlhdCI6MTcyMjM4OTAzNn0.pVqh8wvBKt31ICj8m0dxbNYC96jY2vzMkQqCT6hcdHk.14"}

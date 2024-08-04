@@ -1,0 +1,685 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /bankaccount:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - bankaccount
+      summary: Add new Bank Accounts
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new Bank Accounts
+          required: true
+          schema:
+            $ref: '#/definitions/bankaccount'
+      responses:
+        '201':
+          description: An object with Bank Accounts details
+
+  /bankaccount/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - bankaccount
+      summary: List Bank Accounts
+      description: Search Bank Accounts 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: createby
+          in: query
+          description: createby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createby_mode
+          in: query
+          description: createby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateby
+          in: query
+          description: updateby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateby_mode
+          in: query
+          description: updateby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: acctype_desc
+          in: query
+          description: acctype_desc values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: acctype_desc_mode
+          in: query
+          description: acctype_desc mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: doc_status_id
+          in: query
+          description: doc_status_id values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: doc_status_id_mode
+          in: query
+          description: doc_status_id mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: bank_id
+          in: query
+          description: bank_id values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: bank_id_mode
+          in: query
+          description: bank_id mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: bank_name
+          in: query
+          description: bank_name values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: bank_name_mode
+          in: query
+          description: bank_name mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: acc_no
+          in: query
+          description: acc_no values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: acc_no_mode
+          in: query
+          description: acc_no mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: acctype_id
+          in: query
+          description: acctype_id values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: acctype_id_mode
+          in: query
+          description: acctype_id mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: bankinfo_id
+          in: query
+          description: bankinfo_id values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: bankinfo_id_mode
+          in: query
+          description: bankinfo_id mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: acc_desc
+          in: query
+          description: acc_desc values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: acc_desc_mode
+          in: query
+          description: acc_desc mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: bank_logo_url
+          in: query
+          description: bank_logo_url values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: bank_logo_url_mode
+          in: query
+          description: bank_logo_url mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/bankaccountData'
+        '400':
+          description: Invalid status value
+/bankaccount/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - bankaccount
+      summary: List Bank Accounts
+      description: get all data without paging
+      parameters: 
+       
+        - name: createby
+          in: query
+          description: createby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createby_mode
+          in: query
+          description: createby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateby
+          in: query
+          description: updateby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateby_mode
+          in: query
+          description: updateby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: acctype_desc
+          in: query
+          description: acctype_desc values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: acctype_desc_mode
+          in: query
+          description: acctype_desc mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: doc_status_id
+          in: query
+          description: doc_status_id values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: doc_status_id_mode
+          in: query
+          description: doc_status_id mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: bank_id
+          in: query
+          description: bank_id values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: bank_id_mode
+          in: query
+          description: bank_id mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: bank_name
+          in: query
+          description: bank_name values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: bank_name_mode
+          in: query
+          description: bank_name mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: acc_no
+          in: query
+          description: acc_no values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: acc_no_mode
+          in: query
+          description: acc_no mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: acctype_id
+          in: query
+          description: acctype_id values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: acctype_id_mode
+          in: query
+          description: acctype_id mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: bankinfo_id
+          in: query
+          description: bankinfo_id values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: bankinfo_id_mode
+          in: query
+          description: bankinfo_id mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: acc_desc
+          in: query
+          description: acc_desc values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: acc_desc_mode
+          in: query
+          description: acc_desc mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: bank_logo_url
+          in: query
+          description: bank_logo_url values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: bank_logo_url_mode
+          in: query
+          description: bank_logo_url mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/bankaccountData'
+        '400':
+          description: Invalid status value
+/bankaccount/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - bankaccount
+      summary: List bankaccount
+      description: Keyward search data on acctype_desc,bank_name,acc_no,acc_desc,bank_logo_url
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on acctype_desc,bank_name,acc_no,acc_desc,bank_logo_url
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/bankaccountData'
+        '400':
+          description: Invalid status value
+/bankaccount/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - bankaccount
+      summary: List bankaccount
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get Bank Accounts by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/bankaccountData'
+        '400':
+          description: Invalid status value
+definitions:
+  bankaccount:
+      type: object
+      properties:
+        
+        createby:
+            type: string
+        createat:
+            type: string
+            format: date-time
+        updateby:
+            type: string
+        updateat:
+            type: string
+            format: date-time
+        acctype_desc:
+            type: string
+        doc_status_id:
+            type: integer
+        bank_id:
+            type: integer
+        bank_name:
+            type: string
+        acc_no:
+            type: string
+        acctype_id:
+            type: number
+            format: double
+        bankinfo_id:
+            type: integer
+        acc_desc:
+            type: string
+        bank_logo_url:
+            type: string
+          
+
+  bankaccountData:
+      type: object
+      properties:
+      
+        createby:
+            type: string
+        createat:
+            type: string
+            format: date-time
+        updateby:
+            type: string
+        updateat:
+            type: string
+            format: date-time
+        acctype_desc:
+            type: string
+        doc_status_id:
+            type: integer
+        bank_id:
+            type: integer
+        bank_name:
+            type: string
+        acc_no:
+            type: string
+        acctype_id:
+            type: number
+            format: double
+        bankinfo_id:
+            type: integer
+        acc_desc:
+            type: string
+        bank_logo_url:
+            type: string
+          
+    

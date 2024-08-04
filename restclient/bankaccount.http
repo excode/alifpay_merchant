@@ -1,0 +1,76 @@
+@HOST = http://localhost:8080
+@AUTH = authtoken
+@TESTID = testID
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"email":"test@ucode.ai",
+"password":"123456"
+}
+###
+POST {{HOST}}/bankaccount HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"acctype_desc":"estclf",
+"doc_status_id":"1",
+"bank_id":"1",
+"bank_name":"esse",
+"acc_no":"mollit",
+"acctype_id":"1.35",
+"bankinfo_id":"1",
+"acc_desc":"amet",
+"bank_logo_url":"https://excode.net"
+}
+
+###
+
+GET {{HOST}}/bankaccount? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/bankaccount?acctype_desc=estclf&doc_status_id=1&bank_id=1&bank_name=esse&acc_no=mollit&acctype_id=1.35&bankinfo_id=1&acc_desc=amet&bank_logo_url=https://ex HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/bankaccount/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PUT {{HOST}}/bankaccount/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"acctype_desc":"estclf",
+"doc_status_id":"1",
+"bank_id":"1",
+"bank_name":"esse",
+"acc_no":"mollit",
+"acctype_id":"1.35",
+"bankinfo_id":"1",
+"acc_desc":"amet",
+"bank_logo_url":"https://excode.net"
+}
+###
+PATCH {{HOST}}/bankaccount/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"acctype_desc":"estclf",
+"doc_status_id":"1",
+"bank_id":"1",
+"bank_name":"esse",
+"acc_no":"mollit",
+"acctype_id":"1.35",
+"bankinfo_id":"1",
+"acc_desc":"amet",
+"bank_logo_url":"https://excode.net"
+}
+###
+DELETE {{HOST}}/bankaccount/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 

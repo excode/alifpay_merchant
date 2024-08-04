@@ -1,0 +1,178 @@
+@HOST = https://alifpaywalletapi.azurewebsites.net
+
+@HOST2 = http://localhost:8080
+
+@AUTH = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhODdlNDk4MS0xOWZiLTQ3MDYtOTgwZS04ZWQwMGIxYTIwOGQiLCJlbWFpbCI6ImV4Y29kZS5uZXRAZ21haWwuY29tIiwidWlkIjoiMCIsIm5hbWUiOiJBZm5hbiBBaG1lZCIsInVzZXJuYW1lIjoiYWZuYW4iLCJjb3VudHJ5IjoiMTMwIiwibW9iaWxlbm8iOiI2MDE3NjcwMTk0NSIsInJlZnJlc2hLZXkiOiJTb0NkM1M5NDVEUzU4V2pna2JlR3J3PT0iLCJpYXQiOjE3MjIzMTc2MDMsImV4cCI6MTcyMjMxOTQwM30.0YwqY5wwl_TBbnEb0dOMGoDSZlYhZI2CvZhyw9sP43s
+
+@AUTH_MYPAAA = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4ZTVkNjEwYy02NThhLTQ3MDItODk4OS1iOWI4NTBjZjdkOTYiLCJlbWFpbCI6ImthbGFtQG15cGFhYS5jb20iLCJuYW1lIjoiTXlQYWFhIFNkYiBCaGQiLCJjb3VudHJ5IjpudWxsLCJ1c2VybmFtZSI6Im15cGFhYSIsImJhbGFuY2UiOiI0NDQuNTUiLCJyZWZyZXNoS2V5IjoiVTBnY0RlSkZOdHl5eEpab281eHE1UT09IiwiaWF0IjoxNzE1OTE4MTA3fQ.VTPm9lMp3s7J9DyV3Z1MaOpe3SLCcIv49rv5sYHpxx0
+@AUTH_AF =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTI1MmRlYy00NzIyLTQxNDAtYjAyYy1mNGFiMTEyMDZkMTYiLCJlbWFpbCI6ImZvdW5kZXJAd2luYW5kd2luZ3MuY29tIiwidWlkIjowLCJuYW1lIjoiQWZpYSBNdWJhc3NoaXJhIiwidXNlcm5hbWUiOiJhZmlhIiwiY291bnRyeSI6IiIsIm1vYmlsZW5vIjoiMDE3NjcwMTk4MCIsInJlZnJlc2hLZXkiOiJQOTh4T3NGUnIraHVIZlQ0bHJhaXVRPT0iLCJpYXQiOjE3MTYzNDIwMDZ9.utvebdXwK8R_RNWPQdyioGGIrhCF2IuSCqoz6Cs4p3c
+
+@AUTH_EX =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0OTNmZDQ5Yy1hOWQwLTRhNzEtYmVhYS01MDA0OWE0OTVlODkiLCJlbWFpbCI6ImV4Y29kZS5uZXRAZ21haWwuY29tIiwidWlkIjowLCJuYW1lIjoiRXhDb2RlIERpZ2l0YWwiLCJ1c2VybmFtZSI6ImV4Y29kZTIiLCJjb3VudHJ5IjpudWxsLCJtb2JpbGVubyI6bnVsbCwicmVmcmVzaEtleSI6IlJZdm1XRnc3ZlZEbStZVVF1czZsYVE9PSIsImlhdCI6MTcxNjA4NjQwOX0.f4G6G8DMVVtdnqC289L4-usRZg8HHey5uMnUni5LvHM
+@TESTID = testID
+@AUTH_M=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4ZTVkNjEwYy02NThhLTQ3MDItODk4OS1iOWI4NTBjZjdkOTYiLCJlbWFpbCI6ImthbGFtQG15cGFhYS5jb20iLCJ1aWQiOiIxMTcxNjUiLCJuYW1lIjoiTXlQYWFhIEJpeiIsInVzZXJuYW1lIjoibXlwYWFhIiwiY291bnRyeSI6IjE4IiwibW9iaWxlbm8iOiI2MDE3NjcwMTk0NyIsInJlZnJlc2hLZXkiOiJkRGMwYjZiRlZyT3ZVZ09oTEhmUk9nPT0iLCJpYXQiOjE3MTY3NzUxMTMsImV4cCI6MTcxNjc3NjkxM30.bN0M3_KjeVcakd_iMt9NxVjYuQ2FiOK4BclQ1m-u2EQ
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST2}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"username":"afnan",
+"password":"123456",
+"_x":"0"
+}
+
+###
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST2}}/authVerify HTTP/1.1
+content-type: application/json
+
+{
+"email":"excode.net@gmail.com",
+"otp":"601991"
+}
+###
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST2}}/resendOTP HTTP/1.1
+content-type: application/json
+
+{
+"emaila":"kazad79@gmail.com",
+"userID":"eb5e8cc6-4cb8-453b-a291-eee38c66f6dc"
+}
+
+###
+
+#MAIN REGISTRATION for NODEJS VERSION
+POST {{HOST2}}/accounts/reg HTTP/1.1
+content-type: application/json
+    
+{
+"email":"excode.NET@gmail.com",
+"password":"123456",
+"name":"Afnan Ahmed",
+"username":"excode"
+}
+
+###
+
+#MERCHANT REGISTRATION
+POST {{HOST}}/accounts/merchant-reg HTTP/1.1
+content-type: application/json
+    
+{
+"email":"ceo@winandwings.com",
+"password":"123456",
+"name":"ExCode Digital",
+"username":"ikra",
+"businessname":"iKra Digital Learning",
+"address":"WORQ TTD",
+"city":"TTDI",
+"postcode":"60000",
+"state":"KL",
+"businessregistration":"202101044083" 
+}
+
+###
+#MERCHANT REGISTRATION
+PATCH {{HOST2}}/accounts HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+
+
+"nationality":"18",
+"idno":"A07604703",
+"mobileno":"60176701946",
+"address":"Jalan Makmur",
+"state":"15",
+"addcountry":"18",
+"city":"Gombak",
+"email":"kazad79@gmail.com",
+"dob":"19790102",
+"postcode":"68100",
+"province":"Barisal",
+"mothermaidenname":"Shahida",
+"occupation":"IT - Software-Manager",
+"employer_name":"MyPaaa Sdn Bhd",
+"parentname":"",
+"parentemail":"",
+"parentmobileno":"",
+"parentidno":"",
+"parentidimagefilename":"",
+"parentidimagestring":""
+}
+
+
+###
+#MERCHANT REGISTRATION
+PATCH {{HOST2}}/accounts HTTP/1.1
+Authorization: Bearer {{AUTH_AF}}
+content-type: application/json
+
+{
+
+
+"joblevel":"BUSINESS OWNER"
+}
+
+
+###
+POST {{HOST2}}/changePassword HTTP/1.1
+Authorization: Bearer {{AUTH_M}}
+content-type: application/json
+
+{
+"newPassword":"1234Qwer@@@",
+"confirmPassword":"1234Qwer@@@",
+"oldPassword":"1234Qwer***"
+}
+
+
+###
+POST {{HOST2}}/resendOTPFP HTTP/1.1
+content-type: application/json
+
+{
+"email":"brandonlsy@yahoo.com"
+}
+
+
+
+
+
+###
+POST {{HOST}}/changePassword2 HTTP/1.1
+content-type: application/json
+
+{
+"email":"brandonlsy@yahoo.com",
+"otp":"499441",
+"newPassword":"1234Qwer@@@",
+"confirmPassword":"1234Qwer@@@"
+
+}
+
+###
+POST {{HOST2}}/resendOTP HTTP/1.1
+content-type: application/json
+
+{
+"email":"kazad79@gmail.com",
+"userId":"111eb4f0-dc7e-4355-8411-046a4a35b4b0"
+}
+
+###
+POST {{HOST}}/refreshMytoken HTTP/1.1
+content-type: application/json
+
+{"refresh_token":"1e1y1Jehbb4Gfc0i-OdicJ7IeU-z4I315N5i-I8s4I1n1R-50c4C6Ia64Iak3p5XbV4CbJ09.eyJ1c2VySWQiOiIxMTFlYjRmMC1kYzdlLTQzNTUtODQxMS0wNDZhNGEzNWI0YjAiLCJlbWFpbCI6ImthemFkNzlAZ21haWwuY29tIiwidWlkIjoiMTQxOTk3IiwibmFtZSI6Ik1EIEFidWwgS2FsYW0gQXphZCIsInVzZXJuYW1lIjoia2FsYW0iLCJjb3VudHJ5IjoiMTMwIiwibW9iaWxlbm8iOiI2MDE3NjcwMTk0NiIsInJlZnJlc2hLZXkiOiJIUExlY3RDWURIS29JekdUdTkwQmNRPT0iLCJpYXQiOjE3MjIzMTI0OTh9.-CNY5MPSzhsjGn_0m4zwTcS86808jYzYgTYl9schLXI.14"}
+
+###
+
+
+POST {{HOST}}/authtest/steve HTTP/1.1
+content-type: application/json
+
+{
+
+}

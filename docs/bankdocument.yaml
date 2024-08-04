@@ -1,0 +1,399 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /bankdocument:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - bankdocument
+      summary: Add new Bank documents
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new Bank documents
+          required: true
+          schema:
+            $ref: '#/definitions/bankdocument'
+      responses:
+        '201':
+          description: An object with Bank documents details
+
+  /bankdocument/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - bankdocument
+      summary: List Bank documents
+      description: Search Bank documents 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: createby
+          in: query
+          description: createby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createby_mode
+          in: query
+          description: createby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateby
+          in: query
+          description: updateby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateby_mode
+          in: query
+          description: updateby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: acc_no
+          in: query
+          description: acc_no values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: acc_no_mode
+          in: query
+          description: acc_no mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: bankimgname
+          in: query
+          description: bankimgname values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: bankimgname_mode
+          in: query
+          description: bankimgname mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: uid
+          in: query
+          description: uid values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: uid_mode
+          in: query
+          description: uid mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/bankdocumentData'
+        '400':
+          description: Invalid status value
+/bankdocument/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - bankdocument
+      summary: List Bank documents
+      description: get all data without paging
+      parameters: 
+       
+        - name: createby
+          in: query
+          description: createby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createby_mode
+          in: query
+          description: createby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateby
+          in: query
+          description: updateby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateby_mode
+          in: query
+          description: updateby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: acc_no
+          in: query
+          description: acc_no values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: acc_no_mode
+          in: query
+          description: acc_no mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: bankimgname
+          in: query
+          description: bankimgname values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: bankimgname_mode
+          in: query
+          description: bankimgname mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: uid
+          in: query
+          description: uid values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: uid_mode
+          in: query
+          description: uid mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/bankdocumentData'
+        '400':
+          description: Invalid status value
+/bankdocument/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - bankdocument
+      summary: List bankdocument
+      description: Keyward search data on acc_no,bankimgname,uid
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on acc_no,bankimgname,uid
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/bankdocumentData'
+        '400':
+          description: Invalid status value
+/bankdocument/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - bankdocument
+      summary: List bankdocument
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get Bank documents by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/bankdocumentData'
+        '400':
+          description: Invalid status value
+definitions:
+  bankdocument:
+      type: object
+      properties:
+        
+        createby:
+            type: string
+        createat:
+            type: string
+            format: date-time
+        updateby:
+            type: string
+        updateat:
+            type: string
+            format: date-time
+        acc_no:
+            type: string
+        bankimgname:
+            type: string
+        uid:
+            type: string
+          
+
+  bankdocumentData:
+      type: object
+      properties:
+      
+        createby:
+            type: string
+        createat:
+            type: string
+            format: date-time
+        updateby:
+            type: string
+        updateat:
+            type: string
+            format: date-time
+        acc_no:
+            type: string
+        bankimgname:
+            type: string
+        uid:
+            type: string
+          
+    

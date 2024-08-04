@@ -1,0 +1,120 @@
+@HOST = http://localhost:8080
+@AUTH = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhODdlNDk4MS0xOWZiLTQ3MDYtOTgwZS04ZWQwMGIxYTIwOGQiLCJlbWFpbCI6ImV4Y29kZS5uZXRAZ21haWwuY29tIiwidWlkIjoiMTE3MjcwIiwibmFtZSI6IkFmbmFuIEFobWVkIiwidXNlcm5hbWUiOiJhZm5hbiIsImNvdW50cnkiOiIxMzAiLCJtb2JpbGVubyI6IjYwMTc2NzAxOTQ1IiwicmVmcmVzaEtleSI6ImxFNys4cFROSXM5VnFDK09RRG9SQUE9PSIsImlhdCI6MTcyMjY0ODQwNywiZXhwIjoxNzI1MjQwNDA3fQ.hoiQFgpki8CVUR0V-UCjT33-EexlGfvTzZRDXaeI9-g
+@TESTID = testID
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"email":"afna@ucode.ai",
+"password":"123456"
+}
+###
+POST {{HOST}}/merchantinfo HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"contactperson":"aliqua",
+"mobileno":"601713470460",
+"email":"dolore@ucode.ai8",
+"street":"nonclf",
+"address":"Consequat id eu ut labore ad mollit excepteur voluptate velit culpa incididunt irure labore ex ea.",
+"city":"velit",
+"state":"excepteur",
+"postcode":"magna",
+"country":"reprehenderit",
+"avgtransaction":"1.35",
+"avgmonthlytransaction":"1.35",
+"bankstatement":"",
+"ssm":"",
+"authorizationform":"",
+"signboard":"",
+"storeleftphoto":"",
+"storerightphoto":"",
+"workstation":"",
+"productphoto1":"",
+"productphoto2":"",
+"productphoto3":""
+}
+
+###
+
+GET {{HOST}}/merchantinfo? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/merchantinfo?contactperson=aliqua&mobileno=6017134704&email=dolore@uco&street=nonclf&address=Consequat &city=velit&state=excepteur&postcode=magna&country=reprehende&avgtransaction=1.35&avgmonthlytransaction=1.35&bankstatement=&ssm=&authorizationform=&signboard=&storeleftphoto=&storerightphoto=&workstation=&productphoto1=&productphoto2=&productphoto3= HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/merchantinfo/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PUT {{HOST}}/merchantinfo/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"contactperson":"aliqua",
+"mobileno":"601713470460",
+"email":"dolore@ucode.ai8",
+"street":"nonclf",
+"address":"Consequat id eu ut labore ad mollit excepteur voluptate velit culpa incididunt irure labore ex ea.",
+"city":"velit",
+"state":"excepteur",
+"postcode":"magna",
+"country":"reprehenderit",
+"avgtransaction":"1.35",
+"avgmonthlytransaction":"1.35",
+"bankstatement":"",
+"ssm":"",
+"authorizationform":"",
+"signboard":"",
+"storeleftphoto":"",
+"storerightphoto":"",
+"workstation":"",
+"productphoto1":"",
+"productphoto2":"",
+"productphoto3":""
+}
+###
+PATCH {{HOST}}/merchantinfo/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"contactperson":"aliqua",
+"mobileno":"601713470460",
+"email":"dolore@ucode.ai8",
+"street":"nonclf",
+"address":"Consequat id eu ut labore ad mollit excepteur voluptate velit culpa incididunt irure labore ex ea.",
+"city":"velit",
+"state":"excepteur",
+"postcode":"magna",
+"country":"reprehenderit",
+"avgtransaction":"1.35",
+"avgmonthlytransaction":"1.35",
+"bankstatement":"",
+"ssm":"",
+"authorizationform":"",
+"signboard":"",
+"storeleftphoto":"",
+"storerightphoto":"",
+"workstation":"",
+"productphoto1":"",
+"productphoto2":"",
+"productphoto3":""
+}
+###
+DELETE {{HOST}}/merchantinfo/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 
+
+###
+POST {{HOST}}/merchantinfo/sendApplication http/1.1
+Authorization: Bearer {{AUTH}} 
+
+{
+
+}

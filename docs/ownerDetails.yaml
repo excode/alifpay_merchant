@@ -1,0 +1,478 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /ownerdetails:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - ownerdetails
+      summary: Add new Owner Details
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new Owner Details
+          required: true
+          schema:
+            $ref: '#/definitions/ownerdetails'
+      responses:
+        '201':
+          description: An object with Owner Details details
+
+  /ownerdetails/upload/{colName}/{rowId}:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+      - ownerdetails
+      parameters:
+      - name: colName
+        in: path
+        description: Column/Field name in table/document
+        required: true
+        schema:
+          type: string
+      - name: rowId
+        in: path
+        description: primary id in table/document
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: file
+              properties:
+                filename:
+                  type: file
+                  format: binary
+  responses:
+    '200':
+      description: Successful upload
+        
+  /ownerdetails/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - ownerdetails
+      summary: List Owner Details
+      description: Search Owner Details 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: createby
+          in: query
+          description: createby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createby_mode
+          in: query
+          description: createby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateby
+          in: query
+          description: updateby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateby_mode
+          in: query
+          description: updateby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: name
+          in: query
+          description: name values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: name_mode
+          in: query
+          description: name mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: contactnumber
+          in: query
+          description: contactnumber values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: contactnumber_mode
+          in: query
+          description: contactnumber mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: email
+          in: query
+          description: email values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: email_mode
+          in: query
+          description: email mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: icno
+          in: query
+          description: icno values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: icno_mode
+          in: query
+          description: icno mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/ownerdetailsData'
+        '400':
+          description: Invalid status value
+/ownerdetails/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - ownerdetails
+      summary: List Owner Details
+      description: get all data without paging
+      parameters: 
+       
+        - name: createby
+          in: query
+          description: createby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createby_mode
+          in: query
+          description: createby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateby
+          in: query
+          description: updateby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateby_mode
+          in: query
+          description: updateby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: name
+          in: query
+          description: name values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: name_mode
+          in: query
+          description: name mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: contactnumber
+          in: query
+          description: contactnumber values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: contactnumber_mode
+          in: query
+          description: contactnumber mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: email
+          in: query
+          description: email values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: email_mode
+          in: query
+          description: email mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: icno
+          in: query
+          description: icno values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: icno_mode
+          in: query
+          description: icno mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/ownerdetailsData'
+        '400':
+          description: Invalid status value
+/ownerdetails/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - ownerdetails
+      summary: List ownerdetails
+      description: Keyward search data on name,contactnumber,email,icno
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on name,contactnumber,email,icno
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/ownerdetailsData'
+        '400':
+          description: Invalid status value
+/ownerdetails/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - ownerdetails
+      summary: List ownerdetails
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get Owner Details by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/ownerdetailsData'
+        '400':
+          description: Invalid status value
+definitions:
+  ownerdetails:
+      type: object
+      properties:
+        
+        createby:
+            type: string
+        createat:
+            type: string
+            format: date-time
+        updateby:
+            type: string
+        updateat:
+            type: string
+            format: date-time
+        name:
+            type: string
+        contactnumber:
+            type: string
+        email:
+            type: string
+        icno:
+            type: string
+
+
+  ownerdetailsData:
+      type: object
+      properties:
+      
+        createby:
+            type: string
+        createat:
+            type: string
+            format: date-time
+        updateby:
+            type: string
+        updateat:
+            type: string
+            format: date-time
+        name:
+            type: string
+        contactnumber:
+            type: string
+        email:
+            type: string
+        icno:
+            type: string
+
+    

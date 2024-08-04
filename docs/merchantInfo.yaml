@@ -1,0 +1,808 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /merchantinfo:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - merchantinfo
+      summary: Add new Merchant Info
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new Merchant Info
+          required: true
+          schema:
+            $ref: '#/definitions/merchantinfo'
+      responses:
+        '201':
+          description: An object with Merchant Info details
+
+  /merchantinfo/upload/{colName}/{rowId}:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+      - merchantinfo
+      parameters:
+      - name: colName
+        in: path
+        description: Column/Field name in table/document
+        required: true
+        schema:
+          type: string
+      - name: rowId
+        in: path
+        description: primary id in table/document
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: file
+              properties:
+                filename:
+                  type: file
+                  format: binary
+  responses:
+    '200':
+      description: Successful upload
+        
+  /merchantinfo/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - merchantinfo
+      summary: List Merchant Info
+      description: Search Merchant Info 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: createby
+          in: query
+          description: createby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createby_mode
+          in: query
+          description: createby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateby
+          in: query
+          description: updateby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateby_mode
+          in: query
+          description: updateby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: contactperson
+          in: query
+          description: contactperson values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: contactperson_mode
+          in: query
+          description: contactperson mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: mobileno
+          in: query
+          description: mobileno values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: mobileno_mode
+          in: query
+          description: mobileno mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: email
+          in: query
+          description: email values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: email_mode
+          in: query
+          description: email mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: street
+          in: query
+          description: street values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: street_mode
+          in: query
+          description: street mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: address
+          in: query
+          description: address values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: address_mode
+          in: query
+          description: address mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: city
+          in: query
+          description: city values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: city_mode
+          in: query
+          description: city mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: state
+          in: query
+          description: state values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: state_mode
+          in: query
+          description: state mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: postcode
+          in: query
+          description: postcode values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: postcode_mode
+          in: query
+          description: postcode mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: country
+          in: query
+          description: country values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: country_mode
+          in: query
+          description: country mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: avgtransaction
+          in: query
+          description: avgtransaction values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: avgtransaction_mode
+          in: query
+          description: avgtransaction mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: avgmonthlytransaction
+          in: query
+          description: avgmonthlytransaction values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: avgmonthlytransaction_mode
+          in: query
+          description: avgmonthlytransaction mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/merchantinfoData'
+        '400':
+          description: Invalid status value
+/merchantinfo/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - merchantinfo
+      summary: List Merchant Info
+      description: get all data without paging
+      parameters: 
+       
+        - name: createby
+          in: query
+          description: createby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createby_mode
+          in: query
+          description: createby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateby
+          in: query
+          description: updateby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateby_mode
+          in: query
+          description: updateby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: contactperson
+          in: query
+          description: contactperson values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: contactperson_mode
+          in: query
+          description: contactperson mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: mobileno
+          in: query
+          description: mobileno values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: mobileno_mode
+          in: query
+          description: mobileno mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: email
+          in: query
+          description: email values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: email_mode
+          in: query
+          description: email mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: street
+          in: query
+          description: street values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: street_mode
+          in: query
+          description: street mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: address
+          in: query
+          description: address values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: address_mode
+          in: query
+          description: address mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: city
+          in: query
+          description: city values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: city_mode
+          in: query
+          description: city mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: state
+          in: query
+          description: state values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: state_mode
+          in: query
+          description: state mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: postcode
+          in: query
+          description: postcode values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: postcode_mode
+          in: query
+          description: postcode mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: country
+          in: query
+          description: country values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: country_mode
+          in: query
+          description: country mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: avgtransaction
+          in: query
+          description: avgtransaction values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: avgtransaction_mode
+          in: query
+          description: avgtransaction mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: avgmonthlytransaction
+          in: query
+          description: avgmonthlytransaction values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: avgmonthlytransaction_mode
+          in: query
+          description: avgmonthlytransaction mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/merchantinfoData'
+        '400':
+          description: Invalid status value
+/merchantinfo/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - merchantinfo
+      summary: List merchantinfo
+      description: Keyward search data on contactperson,mobileno,email,street,address,city,state,postcode,country
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on contactperson,mobileno,email,street,address,city,state,postcode,country
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/merchantinfoData'
+        '400':
+          description: Invalid status value
+/merchantinfo/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - merchantinfo
+      summary: List merchantinfo
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get Merchant Info by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/merchantinfoData'
+        '400':
+          description: Invalid status value
+definitions:
+  merchantinfo:
+      type: object
+      properties:
+        
+        createby:
+            type: string
+        createat:
+            type: string
+            format: date-time
+        updateby:
+            type: string
+        updateat:
+            type: string
+            format: date-time
+        contactperson:
+            type: string
+        mobileno:
+            type: string
+        email:
+            type: string
+        street:
+            type: string
+        address:
+            type: string
+        city:
+            type: string
+        state:
+            type: string
+        postcode:
+            type: string
+        country:
+            type: string
+        avgtransaction:
+            type: number
+            format: double
+        avgmonthlytransaction:
+            type: number
+            format: double
+
+
+  merchantinfoData:
+      type: object
+      properties:
+      
+        createby:
+            type: string
+        createat:
+            type: string
+            format: date-time
+        updateby:
+            type: string
+        updateat:
+            type: string
+            format: date-time
+        contactperson:
+            type: string
+        mobileno:
+            type: string
+        email:
+            type: string
+        street:
+            type: string
+        address:
+            type: string
+        city:
+            type: string
+        state:
+            type: string
+        postcode:
+            type: string
+        country:
+            type: string
+        avgtransaction:
+            type: number
+            format: double
+        avgmonthlytransaction:
+            type: number
+            format: double
+
+    

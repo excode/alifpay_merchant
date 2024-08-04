@@ -1,0 +1,833 @@
+
+securitySchemes:
+    bearerAuth:  # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+paths:
+  /fundtransfer:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+        - fundtransfer
+      summary: Add new Fund Transfer
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: displayName
+          description: Save new Fund Transfer
+          required: true
+          schema:
+            $ref: '#/definitions/fundtransfer'
+      responses:
+        '201':
+          description: An object with Fund Transfer details
+
+  /fundtransfer/:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - fundtransfer
+      summary: List Fund Transfer
+      description: Search Fund Transfer 
+      parameters:
+        - name: page
+          in: query
+          description: page No
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: limit data per page or Page Size
+          required: false
+          explode: true
+          schema:
+            type: integer
+        
+        - name: createby
+          in: query
+          description: createby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createby_mode
+          in: query
+          description: createby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateby
+          in: query
+          description: updateby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateby_mode
+          in: query
+          description: updateby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: amount
+          in: query
+          description: amount values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: amount_mode
+          in: query
+          description: amount mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: sourceaccount
+          in: query
+          description: sourceaccount values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: sourceaccount_mode
+          in: query
+          description: sourceaccount mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: transfer_in_reference_id
+          in: query
+          description: transfer_in_reference_id values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: transfer_in_reference_id_mode
+          in: query
+          description: transfer_in_reference_id mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: sourceaccounttokenize
+          in: query
+          description: sourceaccounttokenize values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: sourceaccounttokenize_mode
+          in: query
+          description: sourceaccounttokenize mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: transfer_out_reference_id
+          in: query
+          description: transfer_out_reference_id values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: transfer_out_reference_id_mode
+          in: query
+          description: transfer_out_reference_id mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: servicecharges
+          in: query
+          description: servicecharges values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: servicecharges_mode
+          in: query
+          description: servicecharges mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: gst
+          in: query
+          description: gst values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: gst_mode
+          in: query
+          description: gst mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: destinationbankaccount
+          in: query
+          description: destinationbankaccount values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: destinationbankaccount_mode
+          in: query
+          description: destinationbankaccount mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: trx_date
+          in: query
+          description: trx_date values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+            format: date
+        - name: trx_date_mode
+          in: query
+          description: trx_date mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: dateIs
+            enum:
+              - dateIs
+              - dateIsNot
+              - dateBefore
+              - dateAfter
+        - name: bankid
+          in: query
+          description: bankid values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: bankid_mode
+          in: query
+          description: bankid mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: cardpin
+          in: query
+          description: cardpin values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: cardpin_mode
+          in: query
+          description: cardpin mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: reference
+          in: query
+          description: reference values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: reference_mode
+          in: query
+          description: reference mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  perpage:
+                    type: integer
+                  page:
+                    type: integer
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/definitions/fundtransferData'
+        '400':
+          description: Invalid status value
+/fundtransfer/all:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - fundtransfer
+      summary: List Fund Transfer
+      description: get all data without paging
+      parameters: 
+       
+        - name: createby
+          in: query
+          description: createby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: createby_mode
+          in: query
+          description: createby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: updateby
+          in: query
+          description: updateby values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: updateby_mode
+          in: query
+          description: updateby mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: amount
+          in: query
+          description: amount values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: amount_mode
+          in: query
+          description: amount mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: sourceaccount
+          in: query
+          description: sourceaccount values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: sourceaccount_mode
+          in: query
+          description: sourceaccount mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: transfer_in_reference_id
+          in: query
+          description: transfer_in_reference_id values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: transfer_in_reference_id_mode
+          in: query
+          description: transfer_in_reference_id mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: sourceaccounttokenize
+          in: query
+          description: sourceaccounttokenize values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: sourceaccounttokenize_mode
+          in: query
+          description: sourceaccounttokenize mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: transfer_out_reference_id
+          in: query
+          description: transfer_out_reference_id values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: transfer_out_reference_id_mode
+          in: query
+          description: transfer_out_reference_id mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: servicecharges
+          in: query
+          description: servicecharges values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: servicecharges_mode
+          in: query
+          description: servicecharges mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: gst
+          in: query
+          description: gst values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: gst_mode
+          in: query
+          description: gst mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: destinationbankaccount
+          in: query
+          description: destinationbankaccount values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: destinationbankaccount_mode
+          in: query
+          description: destinationbankaccount mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+        - name: trx_date
+          in: query
+          description: trx_date values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+            format: date
+        - name: trx_date_mode
+          in: query
+          description: trx_date mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: dateIs
+            enum:
+              - dateIs
+              - dateIsNot
+              - dateBefore
+              - dateAfter
+        - name: bankid
+          in: query
+          description: bankid values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: bankid_mode
+          in: query
+          description: bankid mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: cardpin
+          in: query
+          description: cardpin values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: cardpin_mode
+          in: query
+          description: cardpin mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - lt
+              - lte
+              - gt
+              - gte
+        - name: reference
+          in: query
+          description: reference values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: reference_mode
+          in: query
+          description: reference mode values that need to be considered for filter type greater than,less than,equal
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: contains
+            enum:
+              - equals
+              - contains
+              - startsWith
+              - endsWith
+              - notContains
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/fundtransferData'
+        '400':
+          description: Invalid status value
+/fundtransfer/suggestions:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - fundtransfer
+      summary: List fundtransfer
+      description: Keyward search data on sourceaccount,transfer_in_reference_id,sourceaccounttokenize,transfer_out_reference_id,destinationbankaccount,reference
+      parameters:
+        - name: search  
+          in: query
+          description: keyword search on sourceaccount,transfer_in_reference_id,sourceaccounttokenize,transfer_out_reference_id,destinationbankaccount,reference
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/fundtransferData'
+        '400':
+          description: Invalid status value
+/fundtransfer/{id}:
+    get:
+      security:
+          - bearerAuth: []
+      tags:
+        - fundtransfer
+      summary: List fundtransfer
+      description: get 
+      parameters:
+        - name: id
+          in: path
+          description: get Fund Transfer by id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/definitions/fundtransferData'
+        '400':
+          description: Invalid status value
+definitions:
+  fundtransfer:
+      type: object
+      properties:
+        
+        createby:
+            type: string
+        createat:
+            type: string
+            format: date-time
+        updateby:
+            type: string
+        updateat:
+            type: string
+            format: date-time
+        amount:
+            type: number
+            format: double
+        sourceaccount:
+            type: string
+        transfer_in_reference_id:
+            type: string
+        sourceaccounttokenize:
+            type: string
+        transfer_out_reference_id:
+            type: string
+        servicecharges:
+            type: number
+            format: double
+        gst:
+            type: number
+            format: double
+        destinationbankaccount:
+            type: string
+        trx_date:
+            type: string
+            format: date-time
+        bankid:
+            type: number
+            format: double
+        cardpin:
+            type: integer
+        reference:
+            type: string
+          
+
+  fundtransferData:
+      type: object
+      properties:
+      
+        createby:
+            type: string
+        createat:
+            type: string
+            format: date-time
+        updateby:
+            type: string
+        updateat:
+            type: string
+            format: date-time
+        amount:
+            type: number
+            format: double
+        sourceaccount:
+            type: string
+        transfer_in_reference_id:
+            type: string
+        sourceaccounttokenize:
+            type: string
+        transfer_out_reference_id:
+            type: string
+        servicecharges:
+            type: number
+            format: double
+        gst:
+            type: number
+            format: double
+        destinationbankaccount:
+            type: string
+        trx_date:
+            type: string
+            format: date-time
+        bankid:
+            type: number
+            format: double
+        cardpin:
+            type: integer
+        reference:
+            type: string
+          
+    

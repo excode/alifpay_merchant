@@ -1,0 +1,67 @@
+@HOST = http://localhost:8080
+@AUTH = authtoken
+@TESTID = testID
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+POST {{HOST}}/auth HTTP/1.1
+content-type: application/json
+
+{
+"email":"test@ucode.ai",
+"password":"123456"
+}
+###
+POST {{HOST}}/ownerdetails HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"name":"veniam",
+"contactnumber":"601785064679",
+"email":"minim@ucode.ai2",
+"icno":"sunt4",
+"icfrontimage":"",
+"icbackimage":""
+}
+
+###
+
+GET {{HOST}}/ownerdetails? HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/ownerdetails?name=veniam&contactnumber=6017850646&email=minim@ucod&icno=sunt4&icfrontimage=&icbackimage= HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+GET {{HOST}}/ownerdetails/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+
+###
+PUT {{HOST}}/ownerdetails/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"name":"veniam",
+"contactnumber":"601785064679",
+"email":"minim@ucode.ai2",
+"icno":"sunt4",
+"icfrontimage":"",
+"icbackimage":""
+}
+###
+PATCH {{HOST}}/ownerdetails/{{TESTID}} HTTP/1.1
+Authorization: Bearer {{AUTH}}
+content-type: application/json
+
+{
+"name":"veniam",
+"contactnumber":"601785064679",
+"email":"minim@ucode.ai2",
+"icno":"sunt4",
+"icfrontimage":"",
+"icbackimage":""
+}
+###
+DELETE {{HOST}}/ownerdetails/{{TESTID}} http/1.1
+Authorization: Bearer {{AUTH}} 
