@@ -102,7 +102,7 @@ exports.sendWelcome =async (user,Password)=>{
        const user = req.jwt;
        const merchantEmail = user.email;
         console.log(user)
-        const url="http://localhost:8080/";
+        const url="https://alifpaymerchant-cuf6fvekhngcbmd9.southeastasia-01.azurewebsites.net/";
         const merchant =req.body.merchant ;  ///await MerchantModel.findByEmail2(merchantEmail);
         const bankAccounts = req.body.bankAccounts; //await BankAccountModel.listAll({createby:merchantEmail});
         const owners = req.body.owners// bankAccounts await OwnerModel.listAll({createby:merchantEmail});
