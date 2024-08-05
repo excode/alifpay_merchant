@@ -10,7 +10,7 @@ const partner_key = 'EN35PHUIIJTDVV2XG3YUAABCDUH8W1ABJIHKANJK1549IYJ8EZH';
 const pid = '109999004474844';
 const company_name = 'AlifPay';
 const base_url_uat="https://uat.mpay.my/mpayCZ"
-const base_url=base_url_uat;//"https://mpay.my/mpay"
+const base_url="https://mpay.my/mpay"
 const serviceUrl = base_url+'/tpwalletapi/account/topupaccount';
 
 const doPayment= base_url+'/tpwalletapi/account/dopayment'
