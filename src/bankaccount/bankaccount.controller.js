@@ -56,7 +56,7 @@ const funcs =  require("../../common/functions/funcs");
           });
   };
   exports.listAll = (req, res ) => {
-    req.query={...req.query,id:req.jwt.id}
+    req.query={...req.query,createby:req.jwt.email}
     /*
         IMPORTANT
         you can put predefined condition here  based on user and role  
@@ -78,7 +78,7 @@ const funcs =  require("../../common/functions/funcs");
         });
 };
 exports.listSuggestions = (req, res ) => {
-    req.query={...req.query,id:req.jwt.id}
+    req.query={...req.query,createby:req.jwt.email}
     /*
     IMPORTANT
     HERE  "serach" query parameter is reserved for keword searh  
@@ -103,6 +103,8 @@ exports.listSuggestions = (req, res ) => {
   
   exports.getById = (req, res) => {
     let filter ={}
+    filter['createby'] = req.jwt.email
+    
       /*
     IMPORTANT
      
@@ -128,6 +130,7 @@ exports.listSuggestions = (req, res ) => {
       req.body.updateby=req.jwt.email  
         req.body.updateat=funcs.getTime()
       let filter ={}
+      filter['createby'] = req.jwt.email
       /*
     IMPORTANT
      

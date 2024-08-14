@@ -23,7 +23,7 @@ const BankModel = require('./bank.model');
   exports.list = (req, res ) => {
       let limit = req.query.limit && req.query.limit <= 100 ? parseInt(req.query.limit) : 10;
       let page = 0;
-      req.query={...req.query,id:req.jwt.id}
+      //req.query={...req.query,createby:req.jwt.email}
        /*
         IMPORTANT
         you can put predefined condition here  based on user and role  
@@ -52,7 +52,7 @@ const BankModel = require('./bank.model');
           });
   };
   exports.listAll = (req, res ) => {
-    req.query={...req.query,id:req.jwt.id}
+    req.query={...req.query}
     /*
         IMPORTANT
         you can put predefined condition here  based on user and role  
@@ -74,7 +74,7 @@ const BankModel = require('./bank.model');
         });
 };
 exports.listSuggestions = (req, res ) => {
-    req.query={...req.query,id:req.jwt.id}
+    req.query={...req.query}
     /*
     IMPORTANT
     HERE  "serach" query parameter is reserved for keword searh  
@@ -99,6 +99,7 @@ exports.listSuggestions = (req, res ) => {
   
   exports.getById = (req, res) => {
     let filter ={}
+    //filter['createby'] = req.jwt.email
       /*
     IMPORTANT
      

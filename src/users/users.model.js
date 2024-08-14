@@ -101,7 +101,7 @@ exports.findByEmail = (email,checkPrev=false) => {
                 const queryText = 'SELECT * from accounts where LOWER(username)=LOWER(:username) and acctype=:acctype LIMIT 1'
                 console.log(sql(queryText)({username:username,acctype:'MERCHANT'}))
                 const list = await client.query(sql(queryText)({username:username,acctype:'MERCHANT'}))
-               
+               console.log(sql(queryText)({username:username,acctype:'MERCHANT'}))
                 resolve(list.rows[0]);
                 
             } catch (e) {
