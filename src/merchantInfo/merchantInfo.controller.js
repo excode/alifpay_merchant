@@ -5,7 +5,7 @@ const MerchantInfoModel = require('./merchantInfo.model');
   exports.insert = (req, res) => {
         req.body.createby=req.jwt.email  
         req.body.createat=funcs.getTime()
- 
+        req.body.username=req.jwt.username  
         
             MerchantInfoModel.createMerchantInfo(req.body)
                   .then((result) => {

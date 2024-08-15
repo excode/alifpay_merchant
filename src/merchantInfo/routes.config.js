@@ -10,6 +10,7 @@ const rootPath="../../";
   const formValidationRules=[
     {ctrl:'contactperson',format:'text',required:true},
 {ctrl:'mobileno',format:'phone',required:true},
+{ctrl:'introducer',format:'text',required:true},
 {ctrl:'email',format:'email',required:true},
 {ctrl:'street',format:'text',required:true},
 {ctrl:'address',format:'text',required:true},

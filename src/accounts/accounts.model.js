@@ -86,7 +86,7 @@ exports.findByUsername = (username) => {
     });
     
     };
-        
+   
 
 exports.findByContactnumber = (contactnumber) => {
     return new Promise((resolve, reject) => {

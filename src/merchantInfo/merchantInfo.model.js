@@ -1,12 +1,12 @@
 const pool = require("../db");
-    const VCache = require('../../lib/cache');
-    const funcs =  require("../../common/functions/funcs");
-    const {queryFormatter,queryBuilder_string,
+const VCache = require('../../lib/cache');
+const funcs =  require("../../common/functions/funcs");
+const {queryFormatter,queryBuilder_string,
         queryBuilder_number,
         queryBuilder_date} = require("../../common/functions/queryutilPostgre")
-    var sql = require('yesql').pg
-    const otp =  require("../../common/functions/otp");
-    
+var sql = require('yesql').pg
+const otp =  require("../../common/functions/otp");
+const AccountModel =require("../../src/accounts/accounts.model");
       exports.findById = (id,extraFields) => {
         return new Promise((resolve, reject) => {
         ;(async () => {
@@ -285,6 +285,11 @@ if(body.productphoto3!=undefined){
     param.push(":productphoto3");
     vals['productphoto3'] = body.productphoto3 ; 
 }
+if(body.introducer!=undefined){
+    cols.push("introducer");
+    param.push(":introducer");
+    vals['introducer'] = body.introducer ; 
+}
     
           var column = cols.join(',');
           var params = param.join(',');
@@ -293,7 +298,28 @@ if(body.productphoto3!=undefined){
             
             const client = await pool.connect()
             try {
-         
+        let introducerInfo =await AccountModel.findByUsername(body.introducer);
+
+
+        if(introducerInfo) {
+            if(introducerInfo["acctype"]=="MERCHANT"){
+                let myInfo =await AccountModel.findByUsername(body.username);
+                const my_uid= parseInt(myInfo["uid"])
+                const intro_uid= parseInt(introducerInfo["uid"])
+                if(intro_uid>my_uid){
+                    reject("Invalid introducer: The introducer must be an existing member who joined before the referred individual.");
+                    return;
+                }
+
+            }else{
+                reject("Invalid introducer, Introducer must be merchant");
+                return;
+            }
+            
+        }else{
+            reject("Invalid introducer");
+            return;
+        }
         let   createbyCHeck =await this.findOne({"createby":body.createby})
         if(createbyCHeck ) {
             reject("Only one merchant per user");
