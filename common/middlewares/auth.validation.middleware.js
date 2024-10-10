@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken'),
 secret = require('../config/env.config.js').jwt_secret
-const MerchantModel = require('../../src/merchantinfo/merchantinfo.model');
+const MerchantModel = require('../../src/merchantInfo/merchantInfo.model');
 const BankAccountModel = require('../../src/bankaccount/bankaccount.model');
 const OwnerModel = require('../../src/ownerDetails/ownerDetails.model');
 crypto = require('crypto');
@@ -17,10 +17,9 @@ exports.verifyRefreshBodyField = (req, res, next) => {
 
 
 exports.validJWTNeeded = (req, res, next) => {
-    let jwt_Secret =  env.JWT_SECRET??secret ;
-    //console.log(jwt_Secret)
-    //console.log(env.JWT_SECRET)
-   // console.log(secret)
+    let jwt_Secret =  env.PROJECT_ID??secret ;
+    
+
     if (req.headers['authorization']) {
         try {
             let authorization = req.headers['authorization'].split(' ');

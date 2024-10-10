@@ -451,4 +451,4 @@ async function createTableIfNotExists() {
 //To resolve this problem, just run this command in the SQL Editor
 //CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 // YOU SHOULD REMOME THIS FUNCTION IN PRODUCTION
-  createTableIfNotExists();
+ // createTableIfNotExists();

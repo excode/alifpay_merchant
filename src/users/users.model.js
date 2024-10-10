@@ -98,10 +98,10 @@ exports.findByEmail = (email,checkPrev=false) => {
             const client = await pool.connect()
             try {
                 
-                const queryText = 'SELECT * from accounts where LOWER(username)=LOWER(:username) and acctype=:acctype LIMIT 1'
+                const queryText = 'SELECT * from accounts where LOWER(username)=LOWER(:username) and acctype!=:acctype LIMIT 1'
                 console.log(sql(queryText)({username:username,acctype:'MERCHANT'}))
-                const list = await client.query(sql(queryText)({username:username,acctype:'MERCHANT'}))
-               console.log(sql(queryText)({username:username,acctype:'MERCHANT'}))
+                const list = await client.query(sql(queryText)({username:username,acctype:'NORMAL'}))
+                console.log(sql(queryText)({username:username,acctype:'NORMAL'}))
                 resolve(list.rows[0]);
                 
             } catch (e) {

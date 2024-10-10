@@ -28,7 +28,7 @@ exports.login = async(req, res) => {
 
 exports.loginOTP = (req, res) => {
     try {
-        let jwt_Secret =  env.JWT_SECRET??jwtSecret ;
+        let jwt_Secret =  env.PROJECT_ID??jwtSecret ;
         let refreshId =  req.body.userId + jwt_Secret ;
         let salt = crypto.randomBytes(16).toString('base64');
         let hash = crypto.createHmac('sha512', salt).update(refreshId).digest("base64");
@@ -53,7 +53,7 @@ exports.loginOTP = (req, res) => {
 exports.refresh_token = (req, res) => {
     try {
         const refreshToken = req.body.refresh_token;
-        let jwt_Secret =  env.JWT_SECRET??jwtSecret ;
+        let jwt_Secret =  env.PROJECT_ID??jwtSecret ;
         
        if (refreshToken == null) return res.sendStatus(401); // No refresh token provided
        const {a,b} = utils.reverseMerge(refreshToken);
