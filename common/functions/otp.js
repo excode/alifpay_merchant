@@ -10,7 +10,9 @@ const { use } = require('../../server');
 
 exports.sendOTP =async (user,FP=0)=>{
     //console.log(user)
-    const password= user.username=="kalam"?"112233": funcs.randomNumber(6);
+    //
+    const testUsers=["kalam","afia","eesa"]
+    const password= testUsers.includes(user.username) ?"112233": funcs.randomNumber(6);
     //console.log("AAA")
     var emailContent="Your AlifPay  Email OTP is "+password
     if(FP==1){

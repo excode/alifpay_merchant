@@ -2,15 +2,15 @@
 const funcs = require('./funcs')
 const crypto = require('crypto');
 const axios = require('axios');
-
+const  env  = process.env;
 const partner_key = 'EN35PHUIIJTDVV2XG3YUAABCDUH8W1ABJIHKANJK1549IYJ8EZH';
 
 //const aaa='2FAFA284C924F47567A29F125C600F1A3A96656CB7A5EB0721BB783E9600B96F';
 //const partner_key_1 = aaa;
 const pid = '109999004474844';
 const company_name = 'AlifPay';
-const base_url_uat="https://uat.mpay.my/mpayCZ"
-const base_url="https://mpay.my/mpay"
+//const base_url_uat="https://uat.mpay.my/mpayCZ"
+const base_url=env.BASE_URL ;//"https://mpay.my/mpay"
 const serviceUrl = base_url+'/tpwalletapi/account/topupaccount';
 
 const doPayment= base_url+'/tpwalletapi/account/dopayment'

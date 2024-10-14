@@ -1,4 +1,4 @@
-@HOST = https://alifpaywalletapi.azurewebsites.net
+@HOST = https://alifpaymerchant-cuf6fvekhngcbmd9.southeastasia-01.azurewebsites.net
 @HOSTL = http://localhost:8080
 @AUTH = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTFlYjRmMC1kYzdlLTQzNTUtODQxMS0wNDZhNGEzNWI0YjAiLCJlbWFpbCI6ImthemFkNzlAZ21haWwuY29tIiwibmFtZSI6IkthbGFtIEF6YWQiLCJ1c2VybmFtZSI6ImthbGFtIiwiY291bnRyeSI6IjE4IiwibW9iaWxlbm8iOiI2MDE3NjcwMTk0NiIsInVpZCI6IjE0MTczMSIsImlhdCI6MTcxODA3MzI5OSwiZXhwIjoxNzE4MDc1MDk5fQ.0n3ztJdjqQyOgE1m7NJvC2frMf-6fHoxuUDcJgjRdcA
 @TESTID = 3eaa41ed-dff5-4ad7-85e6-df0151062b43
@@ -12,8 +12,8 @@ POST {{HOSTL}}/auth HTTP/1.1
 content-type: application/json
 
 {
-"username":"kalam",
-"password":"123456",
+"username":"ahmad",
+"password":"M@lik9559",
 "_x":"0"
 }
 ###
