@@ -116,6 +116,7 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
                             username: user.username ,
                             country: user.country ,
                             mobileno: user.mobileno,
+                            acctype:user.acctype,
                             x:x 
                         
                     };
@@ -144,6 +145,12 @@ exports.isOTPMatch = (req, res, next) => {
                // console.log(hash);
                // console.log(passwordFields[1]);
                 if (hash === passwordFields[1]) {
+                    let userType=4;
+                    if(user.acctype=="FP"){
+                        userType=2;
+                    }else if(user.acctype=="FC"){
+                        userType=3;
+                    }
                     req.body = {
                         userId: user.id?user.id:"",
                         email: user.email,
@@ -151,7 +158,9 @@ exports.isOTPMatch = (req, res, next) => {
                         name: user.name ,
                         username: user.username ,
                         country: user.country??"" ,
-                        mobileno: user.mobileno??"" 
+                        mobileno: user.mobileno??"",
+                        userType:userType
+
                     };
                     await  UserModel.flushOTP( user.id);
                     return next();
