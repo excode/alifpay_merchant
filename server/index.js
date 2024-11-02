@@ -13,6 +13,7 @@ const FundtransferRouter = require('../src/fundtransfer/routes.config');
 const MerchantInfoRouter = require('../src/merchantInfo/routes.config');
 const OwnerDetailsRouter = require('../src/ownerDetails/routes.config');
 
+const AccountsRouter = require('../src/accounts/routes.config');
 
 const CasaRouter = require('../src/casa/routes.config');
 
@@ -120,6 +121,7 @@ BankdocumentRouter.routesConfig(app);
 FundtransferRouter.routesConfig(app);
 MerchantInfoRouter.routesConfig(app);
 OwnerDetailsRouter.routesConfig(app);
+AccountsRouter.routesConfig(app);
 CasaRouter.routesConfig(app);
 app.use(express.static('uploads'))
 module.exports = app;

@@ -36,55 +36,21 @@ const rootPath="../../";
     
       
     app.post('/accounts/reg', [
-    FormValidation.formValidation(formValidationRules),
-    AccountsController.reg
+      ValidationMiddleware.validJWTNeeded,
+      FormValidation.formValidation(formValidationRules),
+      AccountsController.reg
     ]);
 
-    app.post('/accounts/merchant-reg', [
-      FormValidation.formValidation(formValidationMerchantRules),
-      AccountsController.merchantReg
-      ]);
+   
     
-      
-    app.post('/accounts/upload/:columnName/:rowId', [
-        ValidationMiddleware.validJWTNeeded,
-        //PermissionMiddleware.accountsInsertPermission(),  // 
-        //PermissionMiddleware.jaccountsInsertLimit(),     // 
-        PermissionMiddleware.minimumPermissionLevelRequired(USER),
-        AccountsController.uploadfile
-    ]);
+   
         
       app.get('/accounts', [
           ValidationMiddleware.validJWTNeeded,
           PermissionMiddleware.minimumPermissionLevelRequired(USER),
           AccountsController.list
       ]);
-      app.get('/accounts/all', [   //  Required to Fill UI Component like Dropdown ,List , can be disabled if not required
-        ValidationMiddleware.validJWTNeeded,
-        PermissionMiddleware.minimumPermissionLevelRequired(USER),
-        AccountsController.listAll
-    ]);
-    app.get('/accounts/suggestions', [   //  Required to Fill UI Component like Auto Complete , can be disabled if not required
-        ValidationMiddleware.validJWTNeeded,
-        PermissionMiddleware.minimumPermissionLevelRequired(USER),
-        AccountsController.listSuggestions
-    ]);
-      app.get('/accounts/:accountsId', [
-          ValidationMiddleware.validJWTNeeded,
-          PermissionMiddleware.minimumPermissionLevelRequired(USER),
-          AccountsController.getById
-      ]);
-      app.patch('/accounts', [
-          ValidationMiddleware.validJWTNeeded,
-          PermissionMiddleware.minimumPermissionLevelRequired(USER),
-          FormValidation.formValidation(formValidationRules,'UPDATE'),
-          AccountsController.patchById
-      ]);
-
-      app.post('/accounts/test', [
-        //FormValidation.formValidation(formValidationRules),
-        AccountsController.test
-        ]);
+    
      
   };
   

@@ -14,9 +14,9 @@ exports.test = async (req, res) => {
 }
 exports.reg = (req, res) => {
 
-req.body.createby="REG"
-req.body.createat=funcs.getTime()
-req.body.acctype = "NORMAL";
+    req.body.createby=req.jwt.email
+    req.body.createat=funcs.getTime()
+    req.body.acctype = "NORMAL";
          
 // Hashing  password data 
 if (req.body.password) {
@@ -25,7 +25,7 @@ if (req.body.password) {
     var pass= req.body.password;
     req.body.password = salt + "$" + hash;
 }
-    req.body.createby="REG"
+   
     AccountsModel.createAccounts(req.body)
           .then(async(result) => {
             
@@ -93,7 +93,7 @@ if (req.body.password) {
   exports.list = (req, res ) => {
       let limit = req.query.limit && req.query.limit <= 100 ? parseInt(req.query.limit) : 10;
       let page = 0;
-      req.query.id = req.JWT.userId;
+      req.query.createby = req.jwt.email;
        /*
         IMPORTANT
         you can put predefined condition here  based on user and role  
