@@ -1,4 +1,4 @@
-@HOST = https://alifpaywalletapi.azurewebsites.net
+@HOST = https://api.web.uat.alifpay.com.my
 
 @HOST2 = http://localhost:8080
 
@@ -15,7 +15,7 @@ POST {{HOST2}}/auth HTTP/1.1
 content-type: application/json
 
 {
-"username":"afnan",
+"username":"afia",
 "password":"123456",
 "_x":"0"
 }
@@ -26,8 +26,8 @@ POST {{HOST2}}/authVerify HTTP/1.1
 content-type: application/json
 
 {
-"email":"excode.net@gmail.com",
-"otp":"601991"
+"email":"sharmin@mypaaa.com",
+"otp":"112233"
 }
 ###
 //LOGIN ENDPOINT TO GET AUTH TOKEN
@@ -165,7 +165,7 @@ content-type: application/json
 POST {{HOST}}/refreshMytoken HTTP/1.1
 content-type: application/json
 
-{"refresh_token":"1e1y1Jehbb4Gfc0i-OdicJ7IeU-z4I315N5i-I8s4I1n1R-50c4C6Ia64Iak3p5XbV4CbJ09.eyJ1c2VySWQiOiIxMTFlYjRmMC1kYzdlLTQzNTUtODQxMS0wNDZhNGEzNWI0YjAiLCJlbWFpbCI6ImthemFkNzlAZ21haWwuY29tIiwidWlkIjoiMTQxOTk3IiwibmFtZSI6Ik1EIEFidWwgS2FsYW0gQXphZCIsInVzZXJuYW1lIjoia2FsYW0iLCJjb3VudHJ5IjoiMTMwIiwibW9iaWxlbm8iOiI2MDE3NjcwMTk0NiIsInJlZnJlc2hLZXkiOiJIUExlY3RDWURIS29JekdUdTkwQmNRPT0iLCJpYXQiOjE3MjIzMTI0OTh9.-CNY5MPSzhsjGn_0m4zwTcS86808jYzYgTYl9schLXI.14"}
+{"refresh_token":"ceay4J4heb2G7c5i-Odi8J4I6U-z4Ib1bN1i-Ibs5I2ncR-50c6C7Ia66I9k4p0X8V6C0J49.eyJ1c2VySWQiOiJjYTQ0ZTI3NS1kODQ2LTRiYjEtYjUyYy0wNjdhNjk0MDg2MDQiLCJlbWFpbCI6InNoYXJtaW5AbXlwYWFhLmNvbSIsInVpZCI6IjExNzM0MiIsIm5hbWUiOiJBZmlhIE11YmFzc2hpcmEiLCJ1c2VybmFtZSI6ImFmaWEiLCJjb3VudHJ5IjoiMTMwIiwibW9iaWxlbm8iOiI2MDkxNzQzNDM0MzQiLCJ1c2VyVHlwZSI6MiwicmVmcmVzaEtleSI6IkFWZ0xHaGw2VU0wSTRCbDhiNDhMYkE9PSIsImlhdCI6MTcyOTMzNDQ1Mn0.rx3rPwTBErvGnMtlMaOiWIMh9ZURqUSrL_VQZpIDv4A.14"}
 
 ###
 

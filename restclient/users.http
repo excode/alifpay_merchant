@@ -12,8 +12,8 @@ POST {{HOSTL}}/auth HTTP/1.1
 content-type: application/json
 
 {
-"username":"ahmad",
-"password":"M@lik9559",
+"username":"afia",
+"password":"123456",
 "_x":"0"
 }
 ###

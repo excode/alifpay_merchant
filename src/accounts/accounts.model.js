@@ -690,7 +690,7 @@ if(body.businessregistration!=undefined){
                 const client = await pool.connect()
                 try {
                  
-                    const queryText = 'SELECT * from accounts' +searchConditions+' order by '+sortBy+' '+sortDirection+' LIMIT '+perPage+' OFFSET '+offset;
+                    const queryText = 'SELECT name,email,username,uid,mobileno,createat,createby from accounts' +searchConditions+' order by '+sortBy+' '+sortDirection+' LIMIT '+perPage+' OFFSET '+offset;
                     const list = await client.query(sql(queryText)(vals));
                     const queryTextCount = 'SELECT COUNT(*) as total from accounts' +searchConditions
                     //console.log(sql(queryText)(vals))
