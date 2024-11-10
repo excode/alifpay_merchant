@@ -108,6 +108,12 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
                 if (hash === passwordFields[1]) {
                    // console.log("OK1")
                    let x=req.body._x;
+                   let userType=4;
+                    if(user.acctype=="FP"){
+                        userType=2;
+                    }else if(user.acctype=="FC"){
+                        userType=3;
+                    }
                     req.body = {
                             userId: user.id?user.id:"",
                             email: user.email,
@@ -117,6 +123,7 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
                             country: user.country ,
                             mobileno: user.mobileno,
                             acctype:user.acctype,
+                            userType:userType,
                             x:x 
                         
                     };
