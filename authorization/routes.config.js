@@ -9,6 +9,11 @@ exports.routesConfig = function (app) {
         VerifyUserMiddleware.isPasswordAndUserMatch,
         AuthorizationController.login
     ]);
+    app.post('/auth2', [
+        VerifyUserMiddleware.hasAuthValidFields,
+        VerifyUserMiddleware.isPasswordAndUserMatch,
+        AuthorizationController.loginOTP
+    ]);
     app.post('/refreshMytoken', [
         ValidationMiddleware.verifyRefreshBodyField,
         //VerifyUserMiddleware.isPasswordAndUserMatch,
