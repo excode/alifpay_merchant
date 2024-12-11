@@ -877,4 +877,175 @@ if(otpec!=undefined){
           
           };
 
-          
+          exports.requestOtp2 = async(username,otpfor) => {
+            var vals = {};         
+            vals= {username:username,otpfor:otpfor}; 
+                       
+            return new Promise((resolve, reject) => {
+            ;(async () => {
+                
+                const client = await pool.connect()
+                try {
+                    
+                    await client.query('BEGIN');
+                    const queryText = 'UPDATE accounts SET otpfor=:otpfor,otp2expires=CURRENT_TIMESTAMP + INTERVAL \'30 minutes\'   WHERE username =:username'
+                    const updated = await client.query(sql(queryText)(vals));
+                    
+                    await client.query('COMMIT');
+                    //VCache.resetCache("users_list");
+                    resolve(vals);
+                } catch (e) {
+                    await client.query('ROLLBACK')
+                    // console.log(e);
+                    reject(e);
+                } finally {
+                    client.release()
+                }
+                })().catch(e =>  reject(e))
+            });
+                      
+        };
+        
+        exports.getOtp2For = async(username) => {
+            var vals = {};         
+            vals= {username:username}; 
+                       
+            return new Promise((resolve, reject) => {
+            ;(async () => {
+                
+                const client = await pool.connect()
+                try {
+                    
+                    await client.query('BEGIN');
+                    const queryText = 'SELECT  otpfor,otp2expires from accounts    WHERE username =:username and  otp2expires>CURRENT_TIMESTAMP'
+                    const list = await client.query(sql(queryText)(vals));
+                    await client.query('COMMIT');
+                    if(list.rows.length>0){
+                        resolve(list.rows[0]);
+                    }else{
+                        reject("No-info");
+                    }
+                    
+                    
+                    
+                    
+                   
+                } catch (e) {
+                    console.log(e)
+                    await client.query('ROLLBACK')
+                    // console.log(e);
+                    reject(e);
+                } finally {
+                    client.release()
+                }
+                })().catch(e =>  reject(e))
+            });
+                      
+        };
+        
+        
+        
+        exports.updateOtp2 = async(username,OTP) => {
+              
+               
+            var vals = {};
+            let salt = crypto.randomBytes(16).toString('base64');
+            //console.log(OTP) 
+            let hash = crypto.createHmac('sha512', salt).update(OTP.toString()).digest("base64");
+            // console.log(OTP) 
+            let otpec = salt + "$" + hash;
+            vals= {username:username}; 
+                  
+            if(otpec!=undefined){
+                
+                vals['otp2'] = otpec ;  
+            }
+                        
+        
+        
+            return new Promise((resolve, reject) => {
+            ;(async () => {
+                
+                const client = await pool.connect()
+                try {
+                    
+        
+                    await client.query('BEGIN');
+                    const queryText = 'UPDATE accounts SET otp2=:otp2,otp2expires=CURRENT_TIMESTAMP + INTERVAL \'5 minutes\'   WHERE username =:username'
+        
+                  
+                    const updated = await client.query(sql(queryText)(vals));
+                    
+                    await client.query('COMMIT');
+                    //VCache.resetCache("users_list");
+                    resolve({OTP:OTP});
+                } catch (e) {
+                    await client.query('ROLLBACK')
+                    // console.log(e);
+                    reject(e);
+                } finally {
+                    client.release()
+                }
+                })().catch(e =>  reject(e))
+            });
+        };
+        
+        
+        exports.verifyOtp2= async(username,OTP,myself) => {
+            return new Promise((resolve, reject) => {
+                ;(async () => {
+                    
+                    const client = await pool.connect()
+                    await client.query('BEGIN');
+                    try {
+            const vals={username:username}
+            const queryText = 'SELECT otp2, otpfor,otp2expires from accounts    WHERE username =:username and  otp2expires>CURRENT_TIMESTAMP'
+            console.log(sql(queryText)(vals))
+            const list = await client.query(sql(queryText)(vals));
+        
+           
+            if(list.rows.length>0){
+            const data = list.rows[0];
+            const fixedJsonString = data.otpfor
+            .replace(/'/g, '"') // Replace single quotes with double quotes
+            .replace(/(\w+):/g, '"$1":'); // Add quotes around keys
+        
+        // Parse the corrected JSON string
+           const jsonObject = JSON.parse(fixedJsonString);
+           
+           if(jsonObject.username==myself){
+               
+            
+                        let passwordFields = data.otp2.split('$');
+                        let salt = passwordFields[0];
+                        let hash = crypto.createHmac('sha512', salt).update(OTP).digest("base64");
+                      
+                        if (hash === passwordFields[1]) {
+                            const queryText3 = 'UPDATE accounts SET otp2=:otp2,otp2expires=CURRENT_TIMESTAMP   WHERE username =:username'
+                            let vals3={...vals,otp2:""}
+                  
+                            const updated = await client.query(sql(queryText3)(vals3));
+                          
+                            resolve({done:true});
+        
+                        }else{
+                            reject("Wrong PIN code");
+                        }
+                    }else{
+                        reject("Wrong authorization username");
+                    }
+                    }else{
+        
+                        reject("Wrong PIN code or it has been expired");
+                    }
+                } catch (e) {
+                    await client.query('ROLLBACK')
+                    // console.log(e);
+                    reject(e);
+                } finally {
+                    client.release()
+                }
+                })().catch(e =>  reject(e))
+            });
+        
+        }
