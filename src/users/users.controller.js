@@ -261,4 +261,70 @@ if (req.body.password) {
   
 };
 
+exports.requestOtp2 = (req, res) => {
+    let username =req.params.username
+    let forType=req.body.type??0;
+    let reqFor="{mobile:'"+req.jwt.mobileno+"',name:'"+req.jwt.name+"',username:'"+req.jwt.username+"',for:'Link wallet with merchant-store QR Code'}";
+  
+    if(forType==1){
+      
+    }
+      UsersModel.requestOtp2(username, reqFor)
+          .then((result) => {
+              res.status(200).send(result);
+          }).catch((err)=>{
+              res.status(400).json( {err:err} );
+          });
+  
+  };
+  exports.getOtp2Info = (req, res) => {
+      let username =req.jwt.username
+      //let forType=req.body.type??0;
+     // let reqFor="{mobile:'"+req.jwt.mobileno+"',name:'"+req.jwt.name+"',username:'"+req.jwt.username+"',for:'Link wallet with merchant-store QR Code'}";
+    
+      //if(forType==1){
+        
+      //}
+        UsersModel.getOtp2For(username)
+            .then((result) => {
+                res.status(200).send(result);
+            }).catch((err)=>{
+              console.log(err)
+                res.status(400).json( {err:err} );
+            });
+    
+    };
+  
+    exports.updateOtp2 = (req, res) => {
+      let username =req.jwt.username
+      let otp2= funcs.randomNumber(6);
+      //let forType=req.body.type??0;
+     // let reqFor="{mobile:'"+req.jwt.mobileno+"',name:'"+req.jwt.name+"',username:'"+req.jwt.username+"',for:'Link wallet with merchant-store QR Code'}";
+    
+      //if(forType==1){
+        
+      //}
+        UsersModel.updateOtp2(username,otp2)
+            .then((result) => {
+                res.status(200).send(result);
+            }).catch((err)=>{
+              console.log(err)
+                res.status(400).json( {err:err} );
+            });
+    
+    };
+  
+    exports.verifyOtp2=(req, res)=>{
+      let otp2=req.body.otp2
+      let username= req.body.username
+      UsersModel.verifyOtp2(username,otp2,req.jwt.username)
+      .then((result) => {
+          res.status(200).send(result);
+      }).catch((err)=>{
+        console.log(err)
+          res.status(400).json( {err:err} );
+      });
+    }
+  
+
     

@@ -71,6 +71,35 @@ const rootPath="../../";
           UsersController.removeById
       ]);
 
+      app.patch('/users/request/otp2/:username', [
+        ValidationMiddleware.validJWTNeeded,
+        PermissionMiddleware.minimumPermissionLevelRequired(USER),
+        FormValidation.formValidation(formValidationRules,'UPDATE'),
+        UsersController.requestOtp2
+    ]);
+
+    app.get('/users/request/otp2', [
+      ValidationMiddleware.validJWTNeeded,
+      PermissionMiddleware.minimumPermissionLevelRequired(USER),
+      FormValidation.formValidation(formValidationRules,'UPDATE'),
+      UsersController.getOtp2Info
+  ]);
+
+
+  app.get('/users/update/otp2', [
+    ValidationMiddleware.validJWTNeeded,
+    PermissionMiddleware.minimumPermissionLevelRequired(USER),
+    FormValidation.formValidation(formValidationRules,'UPDATE'),
+    UsersController.updateOtp2
+]);
+
+  app.post('/users/verify/otp2', [
+    ValidationMiddleware.validJWTNeeded,
+    PermissionMiddleware.minimumPermissionLevelRequired(USER),
+    FormValidation.formValidation(formValidationRules,'UPDATE'),
+    UsersController.verifyOtp2
+  ]);
+
 
       
   };
