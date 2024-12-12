@@ -921,7 +921,13 @@ if(otpec!=undefined){
                     const list = await client.query(sql(queryText)(vals));
                     await client.query('COMMIT');
                     if(list.rows.length>0){
-                        resolve(list.rows[0]);
+                        const data =list.rows[0];
+                        const fixedJsonString = data.otpfor
+                    .replace(/'/g, '"') // Replace single quotes with double quotes
+                    .replace(/(\w+):/g, '"$1":'); // Add quotes around keys
+                   var jsonObject = JSON.parse(fixedJsonString);
+                   jsonObject ={...jsonObject,"expires":data.otp2expires}
+                        resolve(jsonObject);
                     }else{
                         reject("No-info");
                     }
