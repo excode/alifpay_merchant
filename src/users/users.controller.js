@@ -315,6 +315,7 @@ exports.requestOtp2 = (req, res) => {
     };
   
     exports.verifyOtp2=(req, res)=>{
+      console.log(req.body)
       let otp2=req.body.otp2
       let username= req.body.username
       UsersModel.verifyOtp2(username,otp2,req.jwt.username)

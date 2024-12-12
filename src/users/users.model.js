@@ -1018,24 +1018,26 @@ if(otpec!=undefined){
             
                         let passwordFields = data.otp2.split('$');
                         let salt = passwordFields[0];
-                        let hash = crypto.createHmac('sha512', salt).update(OTP).digest("base64");
+                        let hash = crypto.createHmac('sha512', salt).update(OTP.toString()).digest("base64");
                       
                         if (hash === passwordFields[1]) {
                             const queryText3 = 'UPDATE accounts SET otp2=:otp2,otp2expires=CURRENT_TIMESTAMP   WHERE username =:username'
                             let vals3={...vals,otp2:""}
                   
                             const updated = await client.query(sql(queryText3)(vals3));
-                          
+                            await client.query('COMMIT');
                             resolve({done:true});
         
                         }else{
+                            await client.query('ROLLBACK')
                             reject("Wrong PIN code");
                         }
                     }else{
+                        await client.query('ROLLBACK')
                         reject("Wrong authorization username");
                     }
                     }else{
-        
+                        await client.query('ROLLBACK')
                         reject("Wrong PIN code or it has been expired");
                     }
                 } catch (e) {
