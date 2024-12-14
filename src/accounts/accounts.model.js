@@ -1154,3 +1154,26 @@ exports.updateBalanceID = async(id, amount) => {
           })().catch(e =>  reject(e))
       });      
 };
+
+exports.findByEmail = (email) => {
+    return new Promise((resolve, reject) => {
+    ;(async () => {
+        
+        const client = await pool.connect()
+        try {
+            
+            const queryText = 'SELECT username from accounts where email=:email and uid!=:uid   LIMIT 1'
+            const list = await client.query(sql(queryText)({email:email,uid:'0'}))
+            resolve(list.rows[0]);
+            
+        } catch (e) {
+            
+            reject(e);
+            
+        } finally {
+            client.release()
+        }
+        })().catch(e =>  reject(e.stack))
+    });
+    
+    };
