@@ -176,3 +176,9 @@ content-type: application/json
 {
 
 }
+
+
+###
+//LOGIN ENDPOINT TO GET AUTH TOKEN
+GET {{HOST2}}/accounts/fp/kalam.azad@ucode.ai HTTP/1.1
+content-type: application/json

@@ -246,3 +246,15 @@ exports.uploadfile=(req,res)=>{
         
 
     
+exports.getByEmail = (req, res) => {
+    
+     
+    let email = req.params.email
+
+    AccountsModel.findByEmail(email)
+          .then((result) => {
+              res.status(200).send(result);
+          }).catch((err)=>{
+              res.status(400).json( {err:err} );
+          });
+  };

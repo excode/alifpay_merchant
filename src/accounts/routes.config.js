@@ -50,6 +50,11 @@ const rootPath="../../";
           PermissionMiddleware.minimumPermissionLevelRequired(USER),
           AccountsController.list
       ]);
+      app.get('/accounts/fp/:email/', [
+        //ValidationMiddleware.validJWTNeeded,
+        //PermissionMiddleware.minimumPermissionLevelRequired(USER),
+        AccountsController.getByEmail
+    ]);
     
      
   };
