@@ -4,7 +4,8 @@ const pool = require("../db");
     const crypto = require('crypto');
     const {queryFormatter,queryBuilder_string,
         queryBuilder_number,
-        queryBuilder_date} = require("../../common/functions/queryutilPostgre")
+        queryBuilder_date} = require("../../common/functions/queryutilPostgre");
+const { reg } = require("./accounts.controller");
     var sql = require('yesql').pg
     
     
@@ -1177,3 +1178,229 @@ exports.findByEmail = (email) => {
     });
     
     };
+
+
+
+    exports.createAccounts2 = async(body) => {
+          
+        var cols=[];
+        var param=[];
+        var vals = {};
+        cols.push("id");
+        param.push(":id");
+        vals['id'] =crypto.randomUUID();
+                             
+    if(body.createby!=undefined){
+        cols.push("createby");
+        param.push(":createby");
+        vals['createby'] = body.createby ; 
+    }
+                             
+    if(body.createat!=undefined){
+        cols.push("createat");
+        param.push(":createat");
+        vals['createat'] = body.createat ; 
+    }
+                             
+    if(body.updateby!=undefined){
+        cols.push("updateby");
+        param.push(":updateby");
+        vals['updateby'] = body.updateby ; 
+    }
+                             
+    if(body.updateat!=undefined){
+        cols.push("updateat");
+        param.push(":updateat");
+        vals['updateat'] = body.updateat ; 
+    }
+                             
+    if(body.email!=undefined){
+        cols.push("email");
+        param.push(":email");
+        vals['email'] = body.email.toLowerCase() ; 
+    }
+                             
+    if(body.name!=undefined){
+        cols.push("name");
+        param.push(":name");
+        vals['name'] = body.name ; 
+    }
+                             
+    if(body.address!=undefined){
+        cols.push("address");
+        param.push(":address");
+        vals['address'] = body.address ; 
+    }
+                             
+    if(body.city!=undefined){
+        cols.push("city");
+        param.push(":city");
+        vals['city'] = body.city ; 
+    }
+                             
+    if(body.state!=undefined){
+        cols.push("state");
+        param.push(":state");
+        vals['state'] = body.state ; 
+    }
+                             
+    if(body.postcode!=undefined){
+        cols.push("postcode");
+        param.push(":postcode");
+        vals['postcode'] = body.postcode ; 
+    }
+                             
+    if(body.password!=undefined){
+        cols.push("password");
+        param.push(":password");
+        vals['password'] = body.password ; 
+    }
+                             
+             
+    if(body.country!=undefined){
+        cols.push("country");
+        param.push(":country");
+        vals['country'] = body.country ; 
+    }
+    
+    //if(body.walletbalance!=undefined){
+        cols.push("walletbalance");
+        param.push(":walletbalance");
+        vals['walletbalance'] = 0.0 ;  
+    //}
+                             
+    if(body.walletbalanceencrypted!=undefined){
+        cols.push("walletbalanceencrypted");
+        param.push(":walletbalanceencrypted");
+        vals['walletbalanceencrypted'] = body.walletbalanceencrypted ; 
+    }
+                             
+    if(body.status!=undefined){
+        cols.push("status");
+        param.push(":status");
+        vals['status'] = body.status ; 
+    }
+    
+    
+        cols.push("verfricationstatus");
+        param.push(":verfricationstatus");
+        vals['verfricationstatus'] = 0.0 ;  
+    
+                             
+    if(body.acctype!=undefined){
+        cols.push("acctype");
+        param.push(":acctype");
+        vals['acctype'] = body.acctype ; 
+    }
+                             
+    if(body.username!=undefined){
+        cols.push("username");
+        param.push(":username");
+        vals['username'] = body.username.toLowerCase() ; 
+    }
+                             
+    if(body.mobileno!=undefined){
+        cols.push("mobileno");
+        param.push(":mobileno");
+        vals['mobileno'] = body.mobileno ; 
+    }
+                             
+    if(body.otp!=undefined){
+        cols.push("otp");
+        param.push(":otp");
+        vals['otp'] = body.otp ; 
+    }
+                             
+    if(body.otpexpires!=undefined){
+        cols.push("otpexpires");
+        param.push(":otpexpires");
+        vals['otpexpires'] = body.otpexpires ; 
+    }
+                             
+    if(body.otpfor!=undefined){
+        cols.push("otpfor");
+        param.push(":otpfor");
+        vals['otpfor'] = body.otpfor ; 
+    }
+    
+    if(body.businessname!=undefined){
+        cols.push("businessname");
+        param.push(":businessname");
+        vals['businessname'] = body.businessname ; 
+    }
+    
+    if(body.businessregistration!=undefined){
+        cols.push("businessregistration");
+        param.push(":businessregistration");
+        vals['businessregistration'] = body.businessregistration ; 
+    }
+    
+    
+        
+              var column = cols.join(',');
+              var params = param.join(',');
+              return new Promise((resolve, reject) => {
+              ;(async () => {
+                
+                const client = await pool.connect()
+                try {
+                    
+            let   usernameCHeck =await this.findOne({"username":body.username.toLowerCase()})
+            console.log(usernameCHeck);
+            console.log("AAAAAAA:"+body.username.toLowerCase());
+            if(usernameCHeck ) {
+                reject("username exists");
+                return;
+              }
+              
+             if(body.referby!=undefined && body.referby !=""){
+              let   usernamerefCHeck =await this.findOne({"username":body.referby.toLowerCase()})
+            console.log(usernamerefCHeck);
+            console.log("AREF:"+body.referby.toLowerCase());
+                if(!usernamerefCHeck) {
+                 
+                    reject("referby not valid");
+                    return;
+                }else{
+                    if(usernamerefCHeck['acctype']=='FP' || usernamerefCHeck['acctype']=='FC') {
+                        body.createby=body.referby
+
+                    }else{
+                        reject("referby not valid by type");
+                        return;
+                    }
+
+                }
+             }else{
+                console.log("*******")
+                console.log(body.referby)
+                reject("referby required");
+                return;
+             }
+            let   contactnumberCHeck =await this.findOne({"email":body.email.toLowerCase()})
+              if(contactnumberCHeck ) {
+                reject("email exists");
+                return;
+              }
+            
+                    await client.query('BEGIN');
+                    const queryText = 'INSERT INTO accounts('+column+') VALUES('+params+') RETURNING id ';
+                    //console.log(sql(queryText)(vals))
+                    const add = await client.query(sql(queryText)(vals));
+                    await client.query('COMMIT');
+                    if(add.rowCount>0){
+                        resolve(add.rows[0]);
+                    }else{
+                        reject("DATA NOT SAVED");
+                    }
+                    
+                } catch (e) {
+                    await client.query('ROLLBACK')
+                    console.log(e);
+                    reject(e);
+                } finally {
+                    client.release()
+                }
+                })().catch(e =>  reject(e))
+            });
+          };

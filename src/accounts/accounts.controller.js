@@ -39,6 +39,33 @@ if (req.body.password) {
      
 
 };
+exports.reg2 = (req, res) => {
+
+    //req.body.createby=req.jwt.email
+    req.body.createat=funcs.getTime()
+    req.body.acctype = "NORMAL";
+         
+// Hashing  password data 
+if (req.body.password) {
+    let salt = crypto.randomBytes(16).toString('base64');
+    let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
+    var pass= req.body.password;
+    req.body.password = salt + "$" + hash;
+}
+   
+    AccountsModel.createAccounts2(req.body)
+          .then(async(result) => {
+            
+            await otp.sendWelcome(req.body,pass)
+            res.status(200).send({id: result.id});
+
+          }).catch((err)=>{
+             
+              res.status(400).json( {err:err} );
+          });
+     
+
+};
 
 exports.merchantReg = (req, res) => {
 

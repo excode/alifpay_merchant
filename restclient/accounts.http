@@ -182,3 +182,18 @@ content-type: application/json
 //LOGIN ENDPOINT TO GET AUTH TOKEN
 GET {{HOST2}}/accounts/fp/kalam.azad@ucode.ai HTTP/1.1
 content-type: application/json
+
+###
+#MAIN REGISTRATION for NODEJS VERSION
+POST {{HOST2}}/accounts/reg2 HTTP/1.1
+content-type: application/json
+    
+{
+"email":"excode.NET@gmail.com",
+"password":"123456",
+"name":"Afnan Ahmed",
+"username":"excode232",
+"referby":"kalam"
+}
+
+###

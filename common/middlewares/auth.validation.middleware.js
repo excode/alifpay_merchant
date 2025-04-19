@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken'),
 secret = require('../config/env.config.js').jwt_secret
-const MerchantModel = require('../../src/merchantInfo/merchantInfo.model');
+//const MerchantModel = require('../../src/merchantInfo/merchantinfo.model');
+const MerchantModel = require('../../src/merchantInfo/merchantInfo.model.js')
 const BankAccountModel = require('../../src/bankaccount/bankaccount.model');
 const OwnerModel = require('../../src/ownerDetails/ownerDetails.model');
 crypto = require('crypto');

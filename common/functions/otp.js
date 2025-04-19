@@ -1,6 +1,6 @@
 const UserModel = require('../../src/users/users.model');
 const AccountModel = require('../../src/accounts/accounts.model');
-const MerchantModel = require('../../src/merchantinfo/merchantinfo.model');
+const MerchantModel = require('../../src/merchantInfo/merchantInfo.model');
 const BankAccountModel = require('../../src/bankaccount/bankaccount.model');
 const OwnerModel = require('../../src/ownerDetails/ownerDetails.model');
 //const TransferModel = require('../../src/transfer/transfer.model');

@@ -32,6 +32,19 @@ const rootPath="../../";
     {ctrl:'businessregistration',format:'text',required:false},
     {ctrl:'username',format:'text',required:true}
   ];
+
+  const formValidationRules2=[
+{ctrl:'referby',format:'text',required:true,max:250,min:5},
+{ctrl:'email',format:'email',required:true,max:250,min:5},
+{ctrl:'name',format:'text',required:true,max:150,min:2},
+{ctrl:'address',format:'text',required:false,max:250,min:2},
+{ctrl:'city',format:'text',required:false},
+{ctrl:'state',format:'text',required:false},
+{ctrl:'postcode',format:'text',required:false},
+{ctrl:'password',format:'password',required:true},
+{ctrl:'country',format:'text',required:false},
+{ctrl:'username',format:'text',required:true}
+  ];
   exports.routesConfig = function (app) {
     
       
@@ -40,7 +53,11 @@ const rootPath="../../";
       FormValidation.formValidation(formValidationRules),
       AccountsController.reg
     ]);
-
+    app.post('/accounts/reg2', [
+     // ValidationMiddleware.validJWTNeeded,
+      FormValidation.formValidation(formValidationRules2),
+      AccountsController.reg2
+    ]);
    
     
    
