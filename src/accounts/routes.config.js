@@ -34,7 +34,7 @@ const rootPath="../../";
   ];
 
   const formValidationRules2=[
-{ctrl:'referby',format:'text',required:true,max:250,min:5},
+{ctrl:'introducer',format:'text',required:true,max:250,min:5},
 {ctrl:'email',format:'email',required:true,max:250,min:5},
 {ctrl:'name',format:'text',required:true,max:150,min:2},
 {ctrl:'address',format:'text',required:false,max:250,min:2},

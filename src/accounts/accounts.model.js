@@ -1353,28 +1353,28 @@ exports.findByEmail = (email) => {
                 return;
               }
               
-             if(body.referby!=undefined && body.referby !=""){
-              let   usernamerefCHeck =await this.findOne({"username":body.referby.toLowerCase()})
+             if(body.introducer!=undefined && body.introducer !=""){
+              let   usernamerefCHeck =await this.findOne({"username":body.introducer.toLowerCase()})
             console.log(usernamerefCHeck);
-            console.log("AREF:"+body.referby.toLowerCase());
+            console.log("AREF:"+body.introducer.toLowerCase());
                 if(!usernamerefCHeck) {
                  
-                    reject("referby not valid");
+                    reject("introducer not valid");
                     return;
                 }else{
                     if(usernamerefCHeck['acctype']=='FP' || usernamerefCHeck['acctype']=='FC') {
-                        body.createby=body.referby
+                        body.createby=usernamerefCHeck["email"]
 
                     }else{
-                        reject("referby not valid by type");
+                        reject("introducer not valid by type");
                         return;
                     }
 
                 }
              }else{
                 console.log("*******")
-                console.log(body.referby)
-                reject("referby required");
+                console.log(body.introducer)
+                reject("introducer required");
                 return;
              }
             let   contactnumberCHeck =await this.findOne({"email":body.email.toLowerCase()})
