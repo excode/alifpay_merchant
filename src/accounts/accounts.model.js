@@ -1337,8 +1337,7 @@ exports.findByEmail = (email) => {
     
     
         
-              var column = cols.join(',');
-              var params = param.join(',');
+             
               return new Promise((resolve, reject) => {
               ;(async () => {
                 
@@ -1363,7 +1362,10 @@ exports.findByEmail = (email) => {
                     return;
                 }else{
                     if(usernamerefCHeck['acctype']=='FP' || usernamerefCHeck['acctype']=='FC') {
-                        body.createby=usernamerefCHeck["email"]
+                        body.createby=usernamerefCHeck["email"];
+                        cols.push("createby");
+                        param.push(":createby");
+                        vals['createby'] = body.createby ; 
 
                     }else{
                         reject("introducer not valid by type");
@@ -1382,6 +1384,8 @@ exports.findByEmail = (email) => {
                 reject("email exists");
                 return;
               }
+              var column = cols.join(',');
+              var params = param.join(',');
             
                     await client.query('BEGIN');
                     const queryText = 'INSERT INTO accounts('+column+') VALUES('+params+') RETURNING id ';
