@@ -17,7 +17,7 @@ exports.reg = (req, res) => {
     req.body.createby=req.jwt.email
     req.body.createat=funcs.getTime()
     req.body.acctype = "NORMAL";
-         
+    req.body.introducer =req.jwt.username
 // Hashing  password data 
 if (req.body.password) {
     let salt = crypto.randomBytes(16).toString('base64');

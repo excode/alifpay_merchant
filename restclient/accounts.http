@@ -189,10 +189,10 @@ POST {{HOST2}}/accounts/reg2 HTTP/1.1
 content-type: application/json
     
 {
-"email":"excode12.NET@gmail.com",
+"email":"excode121.NET@gmail.com",
 "password":"123456",
 "name":"Afnan Ahmed",
-"username":"excode23212",
+"username":"excodetemp",
 "introducer":"kalam"
 }
 

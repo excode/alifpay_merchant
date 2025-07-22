@@ -1,7 +1,9 @@
 const pool = require("../db");
     const VCache = require('../../lib/cache');
+    const axios = require('axios');
     const funcs =  require("../../common/functions/funcs");
     const crypto = require('crypto');
+    const  env  = process.env;
     const {queryFormatter,queryBuilder_string,
         queryBuilder_number,
         queryBuilder_date} = require("../../common/functions/queryutilPostgre");
@@ -289,16 +291,25 @@ if(body.businessregistration!=undefined){
             reject("email exists");
             return;
           }
-        
+                const result = await checkHierarchyRegistration(body.username.toLowerCase(), body.introducer.toLowerCase());
+
+                if (result.success) {
+                // Success logic here
+               
                 await client.query('BEGIN');
                 const queryText = 'INSERT INTO accounts('+column+') VALUES('+params+') RETURNING id ';
                 //console.log(sql(queryText)(vals))
                 const add = await client.query(sql(queryText)(vals));
                 await client.query('COMMIT');
-                if(add.rowCount>0){
-                    resolve(add.rows[0]);
-                }else{
-                    reject("DATA NOT SAVED");
+                    if(add.rowCount>0){
+                        resolve(add.rows[0]);
+                    }else{
+                        reject("DATA NOT SAVED");
+                    }
+                
+                } else {
+                // Error handling here
+                reject(result.error);
                 }
                 
             } catch (e) {
@@ -1354,7 +1365,7 @@ exports.findByEmail = (email) => {
               
              if(body.introducer!=undefined && body.introducer !=""){
               let   usernamerefCHeck =await this.findOne({"username":body.introducer.toLowerCase()})
-            console.log(usernamerefCHeck);
+            //console.log(usernamerefCHeck);
             console.log("AREF:"+body.introducer.toLowerCase());
                 if(!usernamerefCHeck) {
                  
@@ -1386,7 +1397,9 @@ exports.findByEmail = (email) => {
               }
               var column = cols.join(',');
               var params = param.join(',');
-            
+                   const result = await checkHierarchyRegistration(body.username.toLowerCase(), body.introducer.toLowerCase());
+                console.log(result)
+                if (result.success) {
                     await client.query('BEGIN');
                     const queryText = 'INSERT INTO accounts('+column+') VALUES('+params+') RETURNING id ';
                     //console.log(sql(queryText)(vals))
@@ -1397,7 +1410,9 @@ exports.findByEmail = (email) => {
                     }else{
                         reject("DATA NOT SAVED");
                     }
-                    
+                }else{
+                     reject(result.error);
+                }
                 } catch (e) {
                     await client.query('ROLLBACK')
                     console.log(e);
@@ -1408,3 +1423,53 @@ exports.findByEmail = (email) => {
                 })().catch(e =>  reject(e))
             });
           };
+
+exports.post2 = async (url, data) => {
+    //const formParams = new URLSearchParams(data);
+    try {
+      
+      console.log(url)
+        const response = await axios.post(url, data,
+            {
+                headers: {
+                'content-type': 'application/json'
+                }
+              }
+        );
+        return response.data;
+        
+    } catch (error) {
+        //console.error('Error:', error.response.data);
+        throw error;
+    }
+};
+
+ async function checkHierarchyRegistration(username, parentUsername) {
+  const data = {
+    contactNumber: username,
+    introducer: parentUsername,
+    productid: env.PRODUCT_ID,
+    category: "BU"
+  };
+
+  
+  try {
+    const response = await exports.post2(`${env.REF_URL_PRO}/hierarchy/addNewBU/reg`, data);
+     console.log("✅ Registration check successful");
+    // console.log(response)
+    console.log("==============")
+     console.log(data)
+      console.log("==============")
+     if(response){
+        return { success: true, data: response };
+     }else{
+         return { success: false, data: response.data.err };
+     }
+    
+  } catch (error) {
+      //console.log(data)
+     console.log("======ERROR========")
+   // console.log(error)
+    return { success: false, error: error };
+  }
+}
