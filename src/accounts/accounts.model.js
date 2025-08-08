@@ -1174,7 +1174,7 @@ exports.findByEmail = (email) => {
         const client = await pool.connect()
         try {
             
-            const queryText = 'SELECT username from accounts where email=:email and uid!=:uid   LIMIT 1'
+            const queryText = 'SELECT username from accounts where (email=:email or username=:email) and uid!=:uid   LIMIT 1'
             const list = await client.query(sql(queryText)({email:email,uid:'0'}))
             resolve(list.rows[0]);
             
