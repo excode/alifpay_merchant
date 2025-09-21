@@ -1372,11 +1372,16 @@ exports.findByEmail = (email) => {
                     reject("introducer not valid");
                     return;
                 }else{
-                    if(usernamerefCHeck['acctype']=='FP' || usernamerefCHeck['acctype']=='FC') {
+                    if(usernamerefCHeck['acctype']=='FP' || usernamerefCHeck['acctype']=='FC' ||usernamerefCHeck['acctype']=='F-COOP' ) {
+                        
                         body.createby=usernamerefCHeck["email"];
                         cols.push("createby");
                         param.push(":createby");
                         vals['createby'] = body.createby ; 
+                        if(body.acctype==="F-COOP" && usernamerefCHeck['acctype']!=='F-COOP'){
+                          //  reject("introducer must benot valid by type");
+                            //return;
+                        }   
 
                     }else{
                         reject("introducer not valid by type");

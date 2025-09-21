@@ -113,6 +113,8 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
                         userType=2;
                     }else if(user.acctype=="FC"){
                         userType=3;
+                    }else if(user.acctype=="F-COOP"){
+                        userType=5;
                     }
                     req.body = {
                             userId: user.id?user.id:"",
