@@ -38,7 +38,7 @@ app.use(function (req, res, next) {
         
     
 app.use(cors({
-    origin:['http://localhost:8080'], 
+    origin:['http://localhost:8080','https://web.alifpay.com.my'], 
     credentials:true
 }));
 app.use(function (req, res, next) {
