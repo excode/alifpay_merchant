@@ -12,8 +12,8 @@ POST {{HOSTL}}/auth2 HTTP/1.1
 content-type: application/json
 
 {
-"username":"afia",
-"password":"123456",
+"username":"kopjniaga",
+"password":"abcd1234",
 "_x":"0"
 }
 ###

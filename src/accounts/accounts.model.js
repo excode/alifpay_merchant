@@ -1372,13 +1372,13 @@ exports.findByEmail = (email) => {
                     reject("introducer not valid");
                     return;
                 }else{
-                    if(usernamerefCHeck['acctype']=='FP' || usernamerefCHeck['acctype']=='FC' ||usernamerefCHeck['acctype']=='F-CROP' ) {
+                    if(usernamerefCHeck['acctype']=='FP' || usernamerefCHeck['acctype']=='FC' ||usernamerefCHeck['acctype']=='F-COP' ) {
                         
                         body.createby=usernamerefCHeck["email"];
                         cols.push("createby");
                         param.push(":createby");
                         vals['createby'] = body.createby ; 
-                        if(body.acctype==="F-CROP" && usernamerefCHeck['acctype']!=='F-CROP'){
+                        if(body.acctype==="F-COP" && usernamerefCHeck['acctype']!=='F-COP'){
                           //  reject("introducer must benot valid by type");
                             //return;
                         }   
