@@ -45,7 +45,7 @@ exports.reg2 = (req, res) => {
     req.body.createat=funcs.getTime()
     req.body.acctype = "NORMAL";
     if(req.body.coop){
-        req.body.acctype = "F-CROP";
+        req.body.acctype = "F-COP";
     }      
 // Hashing  password data 
 if (req.body.password) {
