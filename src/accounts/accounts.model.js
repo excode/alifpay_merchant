@@ -278,6 +278,17 @@ if(body.businessregistration!=undefined){
             const client = await pool.connect()
             try {
                 
+
+                const username = body.username?.toLowerCase();
+
+// Regex: only allow letters and numbers (no spaces, no special chars)
+const usernameRegex = /^[a-z0-9]+$/;
+
+if (!usernameRegex.test(username)) {
+  reject("Username can only contain letters and numbers. No spaces or special characters allowed.");
+  return;
+}
+
         let   usernameCHeck =await this.findOne({"username":body.username.toLowerCase()})
         console.log(usernameCHeck);
         console.log("AAAAAAA:"+body.username.toLowerCase());
@@ -1354,6 +1365,18 @@ exports.findByEmail = (email) => {
                 
                 const client = await pool.connect()
                 try {
+
+const username = body.username?.toLowerCase();
+
+// Regex: only allow letters and numbers (no spaces, no special chars)
+const usernameRegex = /^[a-z0-9]+$/;
+
+if (!usernameRegex.test(username)) {
+  reject("Username can only contain letters and numbers. No spaces or special characters allowed.");
+  return;
+}
+
+
                     
             let   usernameCHeck =await this.findOne({"username":body.username.toLowerCase()})
             console.log(usernameCHeck);
